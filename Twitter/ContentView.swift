@@ -40,7 +40,7 @@ struct Home: View {
     @State var loading:Bool = false
     
     @State var data:[Weibo] = []
-    @State var showComposeWindow = false
+    
     
     @State private var selectedShow: TVShow?
     
@@ -137,18 +137,17 @@ struct Weibo:Codable,Identifiable{
     let comment:[Comment]
     let retweet:[Retweet]
 }
-
-
-struct Like:Codable{
+struct Like:Codable,Hashable{
     let nickname:String
     let avatar_path:String
+    let source:String
 }
-struct Comment:Codable{
+struct Comment:Codable,Hashable{
     let text:String
     let nickname:String
     let avatar_path:String
 }
-struct Retweet:Codable{
+struct Retweet:Codable,Hashable{
     let text:String
     let nickname:String
     let avatar_path:String
@@ -248,6 +247,11 @@ struct Tweet: View {
     
     @State private var showingSheet = false
     
+    
+    @State var showLikeWindow = false
+    @State var showCommentWindow = false
+    @State var showRetweetWindow = false
+    
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             
@@ -321,15 +325,40 @@ struct Tweet: View {
                     //.background(.pink)
                 }
                 
-                HStack(spacing: 10) {
-                    Image(systemName: "heart")
-                    Text("\(weibo.like.count)").padding(.trailing,10)
+                HStack(spacing: 20) {
                     
-                    Image(systemName: "bubble.right")
-                    Text("\(weibo.comment.count)").padding(.trailing,10)
+                    Button(action: { self.showLikeWindow = true }) {
+                        Label("\(weibo.like.count)",systemImage: "heart")
+                    }
+                    .popover(isPresented: $showLikeWindow) {
+                        LikeView(showLikeWindow: $showLikeWindow,likes: weibo.like)
+                    }
+                    .buttonStyle(.link)
                     
-                    Image(systemName: "arrow.2.squarepath")
-                    Text("\(weibo.retweet.count)")
+                    
+                    
+                    Button(action: { self.showCommentWindow = true }) {
+                        Label("\(weibo.comment.count)",systemImage: "bubble.right")
+                    }
+                    .popover(isPresented: $showCommentWindow) {
+                        CommentView(showCommentWindow: $showCommentWindow,comments: weibo.comment)
+                    }
+                    .buttonStyle(.link)
+                    
+                    
+                    Button(action: { self.showRetweetWindow = true }) {
+                        Label("\(weibo.retweet.count)",systemImage: "arrow.2.squarepath")
+                    }
+                    .popover(isPresented: $showRetweetWindow) {
+                        RetweetView(showRetweetWindow: $showRetweetWindow)
+                    }
+                    .buttonStyle(.link)
+                    
+                    
+                    
+                    
+                    
+                    
                 }
                 .padding(.top, 12)
                 .font(.title3)
@@ -341,39 +370,95 @@ struct Tweet: View {
     }
 }
 
-struct Compose: View {
-    @Binding var showComposeWindow: Bool
+struct LikeView: View {
+    @Binding var showLikeWindow: Bool
+    
+    @State var likes:[Like]
     
     var body: some View {
+        ScrollView() {
+            ForEach(likes, id: \.self) { litem in
+                HStack(spacing: 10){
+                    AsyncImage(url: URL(string: litem.avatar_path)) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        Color.gray.opacity(0.1)
+                    }
+                    .frame(width: 30,height: 30)
+                    .cornerRadius(30)
+                    .clipped()
+                    
+                    
+                    VStack(alignment: .leading){
+                        Text(litem.nickname).font(.custom("like", size: 12)).padding(.bottom,1)
+                        
+                        Text(litem.source).font(.custom("like", size: 10)).foregroundColor(.gray)
+                    }
+                    .frame(width:130,height: 40,alignment: .leading)
+                    
+
+                    Image(systemName: "heart")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.pink)
+                        .scaledToFit()
+                        .frame(width: 12, height: 12)
+                    
+                }
+                .frame(width:230)
+                .padding(.vertical,4)
+                .padding(.horizontal,5)
+            }
+        }
+        .frame(width: 230, height: 190)
+    }
+}
+
+
+struct CommentView: View {
+    @Binding var showCommentWindow: Bool
+    
+    @State var comments:[Comment]
+    
+    var body: some View {
+        ScrollView() {
+            ForEach(comments, id: \.self) { citem in
+                HStack(){
+                    AsyncImage(url: URL(string: citem.avatar_path)) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        Color.gray.opacity(0.1)
+                    }
+                    .frame(width: 32,height: 32)
+                    .cornerRadius(32)
+                    .clipped()
+                    .padding(10)
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .leading,spacing: 4){
+                        Text(citem.nickname).font(.custom("like", size: 12)).foregroundColor(.gray)
+                        Text(citem.text).font(.custom("like", size: 14))
+                    }
+                    .frame(width:280,height: 60,alignment: .leading)
+                }
+                .padding(.horizontal,8)
+            }
+        }
+        .frame(width: 350, height: 190)
+    }
+}
+
+
+struct RetweetView: View {
+    @Binding var showRetweetWindow: Bool
+    var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Image(systemName: "person.crop.circle.fill")
-                    .foregroundColor(Color("AccentColor"))
-                    .opacity(0.7)
-                    .font(.system(size: 40))
-                Text("What's happening?")
-                    .font(.title3)
-                    .foregroundColor(.secondary)
-                
-                Spacer()
-            }
-            .padding()
-            
-            Spacer()
-            
-            Divider()
-            HStack {
-                Image(systemName: "camera")
-                Spacer()
-                Image(systemName: "photo")
-                Spacer()
-                Image(systemName: "chart.bar.xaxis")
-                Spacer()
-                Image(systemName: "mappin.and.ellipse")
-            }
-            .font(.title3)
-            .foregroundColor(.secondary)
-            .padding()
+            Text("RetweetView")
         }
         .frame(width: 256, height: 192)
     }
