@@ -140,7 +140,7 @@ struct LoginView: View {
             
             WebView(url: "https://m.weibo.cn")
                 .padding()
-                .frame(width: 480, height: 600)
+                .frame(width: 480, height: 520)
             
             
             Button(action: {
@@ -148,9 +148,13 @@ struct LoginView: View {
                 showloginSheet.toggle()
             }) {
                 Label("完成",systemImage: "arrow.rectanglepath")
-                    .frame(width: 480,height: 40,alignment: .bottom)
+                    .padding()
+                    .frame(width: 480,height: 120)
+                    .background(.yellow.opacity(0.6))
             }
+            .frame(width: 480,height: 520,alignment: .bottom)
         }
+        .frame(width: 480, height: 520)
     }
     
     

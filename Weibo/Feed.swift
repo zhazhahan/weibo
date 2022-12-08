@@ -123,7 +123,7 @@ struct PreviewView: View {
             } placeholder: {
                 Color.gray.opacity(0.1).frame(width: 340,height: 340)
             }
-            .frame(width: 340)
+            .frame(idealWidth: 340,maxWidth: 340,maxHeight: 460)
 
             Spacer()
             
@@ -145,12 +145,12 @@ struct PreviewView: View {
                 }
                 .buttonStyle(.plain)
             }
-            .frame(idealWidth: 340,maxWidth: 340,maxHeight: 410)
+            .frame(width: 340,height: 40)
         }
         .frame(width: 340)
         .task{
             //Init
-            cimg = imgs[index].url
+            cimg = imgs[index].large.url
         }
     }
     
@@ -159,7 +159,7 @@ struct PreviewView: View {
         if( index >= imgs.count ){
             index = imgs.count-1
         }
-        cimg = imgs[index].url
+        cimg = imgs[index].large.url
     }
     
     func showPre(){
@@ -167,12 +167,15 @@ struct PreviewView: View {
         if( index < 0 ){
             index = 0
         }
-        cimg = imgs[index].url
+        cimg = imgs[index].large.url
     }
 }
 
 
 struct Tweet: View {
+    
+    
+    
     @State var weibo: Weibo
     
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
@@ -204,12 +207,18 @@ struct Tweet: View {
                     Text(weibo.user.screen_name)
                         .font(.title3)
                         .fontWeight(.semibold)
-        
+                }
+                
+                HStack(spacing: 10){
+                    Text("\(weibo.dateString)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                     
-                    Text(weibo.created_at)
-                        .font(.body)
+                    Text("来自 \(weibo.source)")
+                        .font(.caption)
                         .foregroundColor(.secondary)
                 }
+                .padding(.bottom,10)
                 
                 Text(weibo.text)
                     .font(.title3)
@@ -225,7 +234,7 @@ struct Tweet: View {
                         .clipped()
                 }
             
-                //https://wx2.sinaimg.cn/orj360/001OwAElly1h8vbhviuwkj60u01i24jc02.jpg
+
                 if( weibo.pics != nil ){
                     Spacer()
 
@@ -234,7 +243,7 @@ struct Tweet: View {
                             Button(action: {
                                 showingSheet.toggle()
                             }, label: {
-                                AsyncImage(url: URL(string: img.url ?? "")) { image in
+                                AsyncImage(url: URL(string: img.url)) { image in
                                     image
                                         .resizable()
                                         .scaledToFill()
@@ -257,38 +266,38 @@ struct Tweet: View {
                     //.background(.pink)
                 }
                 
-//                HStack(spacing: 20) {
-//
-//                    Button(action: { self.showLikeWindow = true }) {
-//                        Label("\(weibo.like.count)",systemImage: "heart")
-//                    }
-//                    .popover(isPresented: $showLikeWindow) {
-//                        LikeView(showLikeWindow: $showLikeWindow,likes: weibo.like)
-//                    }
-//                    .buttonStyle(.link)
-//
-//
-//                    Button(action: { self.showCommentWindow = true }) {
-//                        Label("\(weibo.comment.count)",systemImage: "bubble.right")
-//                    }
-//                    .popover(isPresented: $showCommentWindow) {
-//                        CommentView(showCommentWindow: $showCommentWindow,comments: weibo.comment)
-//                    }
-//                    .buttonStyle(.link)
-//
-//
-//                    Button(action: { self.showRetweetWindow = true }) {
-//                        Label("\(weibo.retweet.count)",systemImage: "arrow.2.squarepath")
-//                    }
-//                    .popover(isPresented: $showRetweetWindow) {
-//                        RetweetView(showRetweetWindow: $showRetweetWindow)
-//                    }
-//                    .buttonStyle(.link)
-//
-//                }
-//                .padding(.top, 12)
-//                .font(.title3)
-//                .foregroundColor(.secondary)
+                HStack(spacing: 20) {
+
+                    Button(action: { self.showLikeWindow = true }) {
+                        Label("\(weibo.attitudes_count)",systemImage: "hand.thumbsup")
+                    }
+                    .popover(isPresented: $showLikeWindow) {
+                        //LikeView(showLikeWindow: $showLikeWindow,likes: weibo.like)
+                    }
+                    .buttonStyle(.link)
+
+
+                    Button(action: { self.showCommentWindow = true }) {
+                        Label("\(weibo.comments_count)",systemImage: "bubble.right")
+                    }
+                    .popover(isPresented: $showCommentWindow) {
+                        //CommentView(showCommentWindow: $showCommentWindow,comments: weibo.comment)
+                    }
+                    .buttonStyle(.link)
+
+
+                    Button(action: { self.showRetweetWindow = true }) {
+                        Label("\(weibo.reposts_count)",systemImage: "arrow.2.squarepath")
+                    }
+                    .popover(isPresented: $showRetweetWindow) {
+                        //RetweetView(showRetweetWindow: $showRetweetWindow)
+                    }
+                    .buttonStyle(.link)
+
+                }
+                .padding(.top, 12)
+                .font(.title3)
+                .foregroundColor(.secondary)
             }
             
             Spacer()

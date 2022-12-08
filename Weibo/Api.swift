@@ -112,20 +112,40 @@ struct Weibo:Codable,Identifiable{
     var id:String
     
     let text:String
+    let source:String
     let created_at:String
+    
+    var dateString: String {
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "E M d h:m:s z yyyy"
+        if let date = dateFormater.date(from: created_at){
+            let dformatter = DateFormatter()
+            dformatter.dateFormat = "MM-dd"
+            return dformatter.string(from: date)
+        }else{
+            return "00-00"
+        }
+    }
     
     let retweeted_status:Retweeted?
     
     let user:WeiboUser
     
     
+    let attitudes_count:Int
+    let comments_count:Int
+    let reposts_count:Int
+    
     let pics:[WeiboPic]?
 }
 struct WeiboPic:Codable,Hashable{
     var pid:String
     let url:String
-//    let created_at:String
-//    let user:WeiboUser
+    let large:WeiboPicLarge
+}
+
+struct WeiboPicLarge:Codable,Hashable{
+    let url:String
 }
 
 struct Retweeted:Codable{
