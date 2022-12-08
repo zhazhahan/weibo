@@ -10,7 +10,6 @@ import Alamofire
 import SwiftyJSON
 
 
-
 struct TVShow: Identifiable {
     var id: String { msg }
     let msg: String
@@ -69,9 +68,9 @@ struct Home: View {
         Task{
             loading = true
             Api().getWeibos(page: 1, user_id: 2){(res) in
-                data = res.data
+                data = res.data.statuses
                 loading = false
-                print("initData")
+                print("initData",res)
             }
         }
     }
@@ -81,16 +80,7 @@ struct Home: View {
 
     
     func syncData(){
-        
-        Task{
-            loading = true
-//            Api().syncData(user_id: 2){(res) in
-//                print("syncData",res)
-//                loading = false
-//                selectedShow = TVShow(msg:res.msg+",新增了\(res.count)条数据")
-//                //SPAlert.present(title:res.msg, preset:.error)
-//            }
-        }
+
     }
 }
 
@@ -118,7 +108,7 @@ struct Feed: View {
 struct PreviewView: View {
     var window = NSScreen.main?.visibleFrame
 
-    var imgs:[Img] = []
+    var imgs:[WeiboPic] = []
     @State var index:Int = 0
     @State var cimg:String = ""
     
@@ -155,12 +145,12 @@ struct PreviewView: View {
                 }
                 .buttonStyle(.plain)
             }
-            .frame(width: 340,height: 40)
+            .frame(idealWidth: 340,maxWidth: 340,maxHeight: 410)
         }
         .frame(width: 340)
         .task{
             //Init
-            cimg = imgs[index].weibo_large ?? ""
+            cimg = imgs[index].url
         }
     }
     
@@ -169,7 +159,7 @@ struct PreviewView: View {
         if( index >= imgs.count ){
             index = imgs.count-1
         }
-        cimg = imgs[index].weibo_large ?? ""
+        cimg = imgs[index].url
     }
     
     func showPre(){
@@ -177,7 +167,7 @@ struct PreviewView: View {
         if( index < 0 ){
             index = 0
         }
-        cimg = imgs[index].weibo_large ?? ""
+        cimg = imgs[index].url
     }
 }
 
@@ -197,7 +187,7 @@ struct Tweet: View {
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             
-            AsyncImage(url: URL(string: weibo.user_avatar_path)) { image in
+            AsyncImage(url: URL(string: weibo.user.avatar_hd)) { image in
                 image
                     .resizable()
                     .scaledToFill()
@@ -211,7 +201,7 @@ struct Tweet: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .firstTextBaseline) {
-                    Text(weibo.user_screen_name)
+                    Text(weibo.user.screen_name)
                         .font(.title3)
                         .fontWeight(.semibold)
         
@@ -225,8 +215,8 @@ struct Tweet: View {
                     .font(.title3)
                     .foregroundColor(.primary)
                 
-                if( weibo.retweet_text.count > 0 ){
-                    Text( "："+weibo.retweet_text )
+                if( weibo.retweeted_status != nil ){
+                    Text( "\(weibo.retweeted_status?.user.screen_name ?? "")：\(weibo.retweeted_status?.text ?? "")" )
                         .font(.title3)
                         .foregroundColor(.primary)
                         .padding(10)
@@ -235,16 +225,16 @@ struct Tweet: View {
                         .clipped()
                 }
             
-                
-                if( weibo.img.count > 0 ){
+                //https://wx2.sinaimg.cn/orj360/001OwAElly1h8vbhviuwkj60u01i24jc02.jpg
+                if( weibo.pics != nil ){
                     Spacer()
-                    
+
                     LazyVGrid(columns: columns,spacing: 10){
-                        ForEach(weibo.img, id: \.self) { img in
+                        ForEach(weibo.pics ?? [], id: \.self) { img in
                             Button(action: {
                                 showingSheet.toggle()
                             }, label: {
-                                AsyncImage(url: URL(string: img.weibo_large ?? "")) { image in
+                                AsyncImage(url: URL(string: img.url ?? "")) { image in
                                     image
                                         .resizable()
                                         .scaledToFill()
@@ -259,7 +249,7 @@ struct Tweet: View {
                             .clipped()
                             .border(.gray.opacity(0.1))
                             .sheet(isPresented: $showingSheet ) {
-                                PreviewView(imgs: weibo.img)
+                                PreviewView(imgs: weibo.pics ?? [])
                             }
                         }
                     }
@@ -267,38 +257,38 @@ struct Tweet: View {
                     //.background(.pink)
                 }
                 
-                HStack(spacing: 20) {
-                    
-                    Button(action: { self.showLikeWindow = true }) {
-                        Label("\(weibo.like.count)",systemImage: "heart")
-                    }
-                    .popover(isPresented: $showLikeWindow) {
-                        LikeView(showLikeWindow: $showLikeWindow,likes: weibo.like)
-                    }
-                    .buttonStyle(.link)
-                    
-                    
-                    Button(action: { self.showCommentWindow = true }) {
-                        Label("\(weibo.comment.count)",systemImage: "bubble.right")
-                    }
-                    .popover(isPresented: $showCommentWindow) {
-                        CommentView(showCommentWindow: $showCommentWindow,comments: weibo.comment)
-                    }
-                    .buttonStyle(.link)
-                    
-                    
-                    Button(action: { self.showRetweetWindow = true }) {
-                        Label("\(weibo.retweet.count)",systemImage: "arrow.2.squarepath")
-                    }
-                    .popover(isPresented: $showRetweetWindow) {
-                        RetweetView(showRetweetWindow: $showRetweetWindow)
-                    }
-                    .buttonStyle(.link)
-                    
-                }
-                .padding(.top, 12)
-                .font(.title3)
-                .foregroundColor(.secondary)
+//                HStack(spacing: 20) {
+//
+//                    Button(action: { self.showLikeWindow = true }) {
+//                        Label("\(weibo.like.count)",systemImage: "heart")
+//                    }
+//                    .popover(isPresented: $showLikeWindow) {
+//                        LikeView(showLikeWindow: $showLikeWindow,likes: weibo.like)
+//                    }
+//                    .buttonStyle(.link)
+//
+//
+//                    Button(action: { self.showCommentWindow = true }) {
+//                        Label("\(weibo.comment.count)",systemImage: "bubble.right")
+//                    }
+//                    .popover(isPresented: $showCommentWindow) {
+//                        CommentView(showCommentWindow: $showCommentWindow,comments: weibo.comment)
+//                    }
+//                    .buttonStyle(.link)
+//
+//
+//                    Button(action: { self.showRetweetWindow = true }) {
+//                        Label("\(weibo.retweet.count)",systemImage: "arrow.2.squarepath")
+//                    }
+//                    .popover(isPresented: $showRetweetWindow) {
+//                        RetweetView(showRetweetWindow: $showRetweetWindow)
+//                    }
+//                    .buttonStyle(.link)
+//
+//                }
+//                .padding(.top, 12)
+//                .font(.title3)
+//                .foregroundColor(.secondary)
             }
             
             Spacer()

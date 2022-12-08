@@ -66,9 +66,17 @@ class Api{
         let parameters:[String:Any] = ["Accept":"application/json","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"]
         AF.request(ApiConfig.baseurl+"/feed/friends",parameters: parameters).validate().responseData { (response) in
             do {
-                let jsdata = JSON(response.data)
-                //let ff  = try jsdata.rawData()
-                print("jsdata:",jsdata)
+                
+                let jsdata =  JSON(response.data)
+                print(jsdata["data"])
+                let ff  = try jsdata.rawData()
+                let object = try JSONDecoder().decode(WeiboRsp.self, from: ff)
+                completion(object)
+                
+                
+//                let jsdata = JSON(response.data)
+//                let ff  = try jsdata.rawData()
+//                print("jsdata:",jsdata)
             }catch(let error) {
                 print("decode fail:",error)
             }
@@ -90,31 +98,49 @@ struct Rsp:Codable{
 
 
 struct WeiboRsp:Codable{
-    var code:Int
-    var data:[Weibo]
+    var ok:Int
+    var http_code:Int
+    var data:WeiboData
+}
+
+struct WeiboData:Codable{
+    var statuses:[Weibo]
 }
 
 struct Weibo:Codable,Identifiable{
     
-    var id:Int
+    var id:String
     
     let text:String
     let created_at:String
     
+    let retweeted_status:Retweeted?
     
-    let user_avatar_path:String
-    let user_screen_name:String
-    
-    let retweet_text:String
-    //let retweet_user_screen_name:String?
-    
-    let img:[Img]
+    let user:WeiboUser
     
     
-    let like:[Like]
-    let comment:[Comment]
-    let retweet:[Retweet]
+    let pics:[WeiboPic]?
 }
+struct WeiboPic:Codable,Hashable{
+    var pid:String
+    let url:String
+//    let created_at:String
+//    let user:WeiboUser
+}
+
+struct Retweeted:Codable{
+    let text:String
+    let created_at:String
+    let user:WeiboUser
+}
+
+
+struct WeiboUser:Codable{
+    let screen_name:String
+    let avatar_hd:String
+    let id:Int
+}
+
 struct Like:Codable,Hashable{
     let nickname:String
     let avatar_path:String
