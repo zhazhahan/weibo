@@ -10,12 +10,12 @@
       }
     },
     {
-      "identity" : "richtextkit",
+      "identity" : "attributedtext",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/danielsaidi/RichTextKit.git",
+      "location" : "https://github.com/Iaenhaall/AttributedText",
       "state" : {
-        "revision" : "eac37cdc1c1e52523b76ae2b4856494c6f1f5a09",
-        "version" : "0.1.2"
+        "revision" : "26a8be0285d664449e352d0e9b1b4a79ee9cecba",
+        "version" : "1.2.0"
       }
     },
     {

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0543FCF52941D4470053EF65 /* RichTextKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0543FCF42941D4470053EF65 /* RichTextKit */; };
+		0543FCF92941E4930053EF65 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = 0543FCF82941E4930053EF65 /* AttributedText */; };
 		05611D95293999A6003B5377 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 05611D94293999A6003B5377 /* Alamofire */; };
 		05611D9829399A19003B5377 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 05611D9729399A19003B5377 /* SwiftyJSON */; };
 		058031342939AC42007B0737 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058031332939AC42007B0737 /* Api.swift */; };
@@ -36,8 +36,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				05611D9829399A19003B5377 /* SwiftyJSON in Frameworks */,
+				0543FCF92941E4930053EF65 /* AttributedText in Frameworks */,
 				05611D95293999A6003B5377 /* Alamofire in Frameworks */,
-				0543FCF52941D4470053EF65 /* RichTextKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +103,7 @@
 			packageProductDependencies = (
 				05611D94293999A6003B5377 /* Alamofire */,
 				05611D9729399A19003B5377 /* SwiftyJSON */,
-				0543FCF42941D4470053EF65 /* RichTextKit */,
+				0543FCF82941E4930053EF65 /* AttributedText */,
 			);
 			productName = Twitter;
 			productReference = 86EE024224B233B900D1762E /* Moon.app */;
@@ -135,7 +135,7 @@
 			packageReferences = (
 				05611D93293999A6003B5377 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				05611D9629399A19003B5377 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				0543FCF32941D4470053EF65 /* XCRemoteSwiftPackageReference "RichTextKit" */,
+				0543FCF72941E4930053EF65 /* XCRemoteSwiftPackageReference "AttributedText" */,
 			);
 			productRefGroup = 86EE024324B233B900D1762E /* Products */;
 			projectDirPath = "";
@@ -369,12 +369,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0543FCF32941D4470053EF65 /* XCRemoteSwiftPackageReference "RichTextKit" */ = {
+		0543FCF72941E4930053EF65 /* XCRemoteSwiftPackageReference "AttributedText" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielsaidi/RichTextKit.git";
+			repositoryURL = "https://github.com/Iaenhaall/AttributedText";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
+				minimumVersion = 1.0.0;
 			};
 		};
 		05611D93293999A6003B5377 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -396,10 +396,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0543FCF42941D4470053EF65 /* RichTextKit */ = {
+		0543FCF82941E4930053EF65 /* AttributedText */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0543FCF32941D4470053EF65 /* XCRemoteSwiftPackageReference "RichTextKit" */;
-			productName = RichTextKit;
+			package = 0543FCF72941E4930053EF65 /* XCRemoteSwiftPackageReference "AttributedText" */;
+			productName = AttributedText;
 		};
 		05611D94293999A6003B5377 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
