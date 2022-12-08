@@ -45,7 +45,7 @@ struct Sidebar: View {
                 NavigationLink {
                     Home()
                 } label: {
-                    Label("Server", systemImage: "server.rack")
+                    Label("时间线", systemImage: "server.rack")
                         .font(.system(size:14))
                         .padding(.vertical,4)
                 }
@@ -54,15 +54,11 @@ struct Sidebar: View {
             
             
             Group {
-                Text("系统")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.secondary)
                 
                 NavigationLink {
                     Home()
                 } label: {
-                    Label("系统设置", systemImage: "slider.horizontal.3")
+                    Label("搜索", systemImage: "slider.horizontal.3")
                         .font(.system(size:14))
                         .padding(.vertical,4)
                 }
@@ -70,7 +66,7 @@ struct Sidebar: View {
                 NavigationLink {
                     Home()
                 } label: {
-                    Label("用户管理", systemImage: "circle.grid.cross")
+                    Label("我的", systemImage: "circle.grid.cross")
                         .font(.system(size:14))
                         .padding(.vertical,4)
                 }

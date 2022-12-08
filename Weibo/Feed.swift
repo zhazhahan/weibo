@@ -9,7 +9,6 @@ import SwiftUI
 import Alamofire
 import SwiftyJSON
 
-
 struct TVShow: Identifiable {
     var id: String { msg }
     let msg: String
@@ -70,7 +69,7 @@ struct Home: View {
             Api().getWeibos(page: 1, user_id: 2){(res) in
                 data = res.data.statuses
                 loading = false
-                print("initData",res)
+                //print("initData",res)
             }
         }
     }
@@ -95,12 +94,21 @@ struct Feed: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
+                
+                Text("Text")
+                
                 ForEach(data) { tweet in
                     Tweet(weibo: tweet)
                         .padding()
                     Divider()
                 }
             }
+        }
+        .task{
+//            let html = "<center>Here is some <b>HTML</b></center>"
+//            html.attributedStringFromHTML { attString in
+//                self.bodyLabel.attributedText = attString
+//            }
         }
     }
 }
@@ -172,10 +180,47 @@ struct PreviewView: View {
 }
 
 
+struct TextWithAttributedString: View {
+
+    var attributedText: NSAttributedString
+    @State private var height: CGFloat = .zero
+
+    var body: some View {
+        InternalTextView(attributedText: attributedText, dynamicHeight: $height)
+            .frame(minHeight: height)
+    }
+
+    struct InternalTextView: UIViewRepresentable {
+
+        var attributedText: NSAttributedString
+        @Binding var dynamicHeight: CGFloat
+
+        func makeUIView(context: Context) -> UITextView {
+            let textView = UITextView()
+            textView.textAlignment = .justified
+            textView.isScrollEnabled = false
+            textView.isUserInteractionEnabled = false
+            textView.showsVerticalScrollIndicator = false
+            textView.showsHorizontalScrollIndicator = false
+            textView.allowsEditingTextAttributes = false
+            textView.backgroundColor = .clear
+            textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            textView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+            return textView
+        }
+
+        func updateUIView(_ uiView: UITextView, context: Context) {
+            uiView.attributedText = attributedText
+            DispatchQueue.main.async {
+                dynamicHeight = uiView.sizeThatFits(CGSize(width: uiView.bounds.width, height: CGFloat.greatestFiniteMagnitude)).height
+            }
+        }
+    }
+}
+
+
 struct Tweet: View {
-    
-    
-    
+
     @State var weibo: Weibo
     
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
@@ -202,12 +247,16 @@ struct Tweet: View {
             .clipped()
             
             
+            
+            
+            
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(weibo.user.screen_name)
                         .font(.title3)
                         .fontWeight(.semibold)
                 }
+                
                 
                 HStack(spacing: 10){
                     Text("\(weibo.dateString)")
@@ -219,6 +268,17 @@ struct Tweet: View {
                         .foregroundColor(.secondary)
                 }
                 .padding(.bottom,10)
+
+                
+                VStack {
+                  TextWithAttributedString(attributedText: weibo.text)
+                    .padding([.leading, .trailing], self.horizontalPadding)
+                    .layoutPriority(1)
+                    .background(Color.clear)
+               }
+               .transition(.opacity)
+               .animation(.linear)
+                
                 
                 Text(weibo.text)
                     .font(.title3)
