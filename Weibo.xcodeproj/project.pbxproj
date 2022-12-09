@@ -21,7 +21,7 @@
 		052DFC2229408C5200DE1BBC /* CookieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieManager.swift; sourceTree = "<group>"; };
 		058031332939AC42007B0737 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		05D9F56F293DCC230009443A /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		86EE024224B233B900D1762E /* Moon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86EE024224B233B900D1762E /* Weibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EE024524B233B900D1762E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		86EE024724B233B900D1762E /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		86EE024924B233BC00D1762E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		86EE024324B233B900D1762E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				86EE024224B233B900D1762E /* Moon.app */,
+				86EE024224B233B900D1762E /* Weibo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,9 +87,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		86EE024124B233B900D1762E /* Moon */ = {
+		86EE024124B233B900D1762E /* Weibo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 86EE025224B233BC00D1762E /* Build configuration list for PBXNativeTarget "Moon" */;
+			buildConfigurationList = 86EE025224B233BC00D1762E /* Build configuration list for PBXNativeTarget "Weibo" */;
 			buildPhases = (
 				86EE023E24B233B900D1762E /* Sources */,
 				86EE023F24B233B900D1762E /* Frameworks */,
@@ -99,14 +99,14 @@
 			);
 			dependencies = (
 			);
-			name = Moon;
+			name = Weibo;
 			packageProductDependencies = (
 				05611D94293999A6003B5377 /* Alamofire */,
 				05611D9729399A19003B5377 /* SwiftyJSON */,
 				0543FCF82941E4930053EF65 /* AttributedText */,
 			);
 			productName = Twitter;
-			productReference = 86EE024224B233B900D1762E /* Moon.app */;
+			productReference = 86EE024224B233B900D1762E /* Weibo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -141,7 +141,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				86EE024124B233B900D1762E /* Moon */,
+				86EE024124B233B900D1762E /* Weibo */,
 			);
 		};
 /* End PBXProject section */
@@ -357,7 +357,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		86EE025224B233BC00D1762E /* Build configuration list for PBXNativeTarget "Moon" */ = {
+		86EE025224B233BC00D1762E /* Build configuration list for PBXNativeTarget "Weibo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				86EE025324B233BC00D1762E /* Debug */,

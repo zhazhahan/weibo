@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "86EE024124B233B900D1762E"
-               BuildableName = "Moon.app"
-               BlueprintName = "Moon"
+               BuildableName = "Weibo.app"
+               BlueprintName = "Weibo"
                ReferencedContainer = "container:Weibo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86EE024124B233B900D1762E"
-            BuildableName = "Moon.app"
-            BlueprintName = "Moon"
+            BuildableName = "Weibo.app"
+            BlueprintName = "Weibo"
             ReferencedContainer = "container:Weibo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "86EE024124B233B900D1762E"
-            BuildableName = "Moon.app"
-            BlueprintName = "Moon"
+            BuildableName = "Weibo.app"
+            BlueprintName = "Weibo"
             ReferencedContainer = "container:Weibo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
