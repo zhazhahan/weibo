@@ -15,9 +15,9 @@
 		0592EE372942DACB00EE5C2D /* FeedItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0592EE362942DACB00EE5C2D /* FeedItemView.swift */; };
 		0592EE392942DB0000EE5C2D /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0592EE382942DB0000EE5C2D /* CommonView.swift */; };
 		0592EE3B2942DB3100EE5C2D /* CookieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052DFC2229408C5200DE1BBC /* CookieManager.swift */; };
+		0592EE3F29431E7100EE5C2D /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0592EE3E29431E7100EE5C2D /* PreviewController.swift */; };
 		86EE024624B233B900D1762E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EE024524B233B900D1762E /* MainView.swift */; };
 		86EE024A24B233BC00D1762E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EE024924B233BC00D1762E /* Assets.xcassets */; };
-		86EE024D24B233BC00D1762E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EE024C24B233BC00D1762E /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +26,10 @@
 		0592EE342942D9A500EE5C2D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0592EE362942DACB00EE5C2D /* FeedItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemView.swift; sourceTree = "<group>"; };
 		0592EE382942DB0000EE5C2D /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
+		0592EE3E29431E7100EE5C2D /* PreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		86EE024224B233B900D1762E /* Weibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EE024524B233B900D1762E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		86EE024924B233BC00D1762E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		86EE024C24B233BC00D1762E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		86EE024E24B233BC00D1762E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86EE024F24B233BC00D1762E /* Weibo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Weibo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +70,7 @@
 			children = (
 				0592EE382942DB0000EE5C2D /* CommonView.swift */,
 				0592EE362942DACB00EE5C2D /* FeedItemView.swift */,
+				0592EE3E29431E7100EE5C2D /* PreviewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -100,17 +101,8 @@
 				86EE024924B233BC00D1762E /* Assets.xcassets */,
 				86EE024E24B233BC00D1762E /* Info.plist */,
 				86EE024F24B233BC00D1762E /* Weibo.entitlements */,
-				86EE024B24B233BC00D1762E /* Preview Content */,
 			);
 			path = Weibo;
-			sourceTree = "<group>";
-		};
-		86EE024B24B233BC00D1762E /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				86EE024C24B233BC00D1762E /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,7 +172,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86EE024D24B233BC00D1762E /* Preview Assets.xcassets in Resources */,
 				86EE024A24B233BC00D1762E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0592EE3F29431E7100EE5C2D /* PreviewController.swift in Sources */,
 				0592EE372942DACB00EE5C2D /* FeedItemView.swift in Sources */,
 				0592EE3B2942DB3100EE5C2D /* CookieManager.swift in Sources */,
 				0592EE352942D9A500EE5C2D /* HomeView.swift in Sources */,
@@ -331,7 +323,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "Weibo/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = XXWHVLE28T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Weibo/Info.plist;
@@ -360,7 +352,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_ASSET_PATHS = "Weibo/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = XXWHVLE28T;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Weibo/Info.plist;

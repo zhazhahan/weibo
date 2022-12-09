@@ -57,12 +57,12 @@ struct FeedItemView: View {
                 }
                 .padding(.bottom,10)
                 
-                AttributedText(weibo.text_raw)
+                Text(weibo.text_raw)
                     .font(.title3)
                     .foregroundColor(.primary)
                 
                 if( weibo.retweeted_status != nil ){
-                    Text( "\(weibo.retweeted_status?.user.screen_name ?? "")：\(weibo.retweeted_status?.text ?? "")" )
+                    Text( "\(weibo.retweeted_status?.user.screen_name ?? "")：\(weibo.retweeted_status?.text_raw ?? "")" )
                         .font(.title3)
                         .foregroundColor(.primary)
                         .padding(10)

@@ -81,14 +81,19 @@ struct PreviewView: View {
     var body: some View {
 
         VStack(){
-            AsyncImage(url: URL(string:cimg )) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-            } placeholder: {
-                Color.gray.opacity(0.1).frame(width: 340,height: 340)
+            ScrollView(){
+                AsyncImage(url: URL(string:cimg )) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    Color.gray.opacity(0.1).frame(width: 340,height: 340)
+                }
+                .frame(width:340)
+                //.background(.pink)
             }
-            .frame(idealWidth: 340,maxWidth: 340,maxHeight: 460)
+            .frame(idealWidth: 340,maxWidth: 340, maxHeight: 520)
+            
 
             Spacer()
             

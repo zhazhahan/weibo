@@ -160,6 +160,12 @@ struct WeiboPicLarge:Codable,Hashable{
 
 struct Retweeted:Codable{
     let text:String
+    var text_raw:String{
+        let regex = try! NSRegularExpression(pattern: "<.*?>", options: [])
+        let range = NSRange(text.startIndex..., in: text)
+        let modifiedString = regex.stringByReplacingMatches(in: text, options: [], range: range, withTemplate: "")
+        return modifiedString
+    }
     let created_at:String
     let user:WeiboUser
 }

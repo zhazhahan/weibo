@@ -36,7 +36,7 @@ struct Home: View {
                 Button(action: {
                     showloginSheet.toggle()
                 }) {
-                    Image(systemName: "link.circle")
+                    Image(systemName: "person.crop.circle.fill")
                 }
                 .sheet(isPresented: $showloginSheet ) {
                     LoginView(showloginSheet:$showloginSheet)
@@ -47,7 +47,7 @@ struct Home: View {
                 Button(action: {
                     initData()
                 }) {
-                    Image(systemName: "arrow.clockwise.circle")
+                    Image(systemName: "goforward")
                 }
             }
             
