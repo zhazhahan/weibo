@@ -86,6 +86,10 @@ class Api{
 
 }
 
+struct TVShow: Identifiable {
+    var id: String { msg }
+    let msg: String
+}
 
 
 
