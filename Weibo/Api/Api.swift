@@ -102,19 +102,20 @@ class Api{
     
     
     // Timeline
-    func getMyWeibo(page:Int,user_id:Int,completion: @escaping (WeiboRsp) -> Void) {
+    func getMyWeibo(page:Int,user_id:Int,completion: @escaping (MyWeiboRsp) -> Void) {
         let parameters:[String:Any] = [
-            "MWeibo-Pwa":"1",
+            "containerid":"2304132103403282_-_WEIBO_SECOND_PROFILE_WEIBO",
             "Accept":"application/json",
             "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
         ]
-        AF.request(ApiConfig.baseurl+"/profile/info?uid=2103403282",parameters: parameters).validate().responseData { (response) in
+        AF.request(ApiConfig.baseurl+"/api/container/getIndex",parameters: parameters).validate().responseData { (response) in
             do {
                 let jsdata =  JSON(response.data)
-                print(jsdata)
-//                let ff  = try jsdata.rawData()
-//                let object = try JSONDecoder().decode(WeiboRsp.self, from: ff)
-//                completion(object)
+                print("4-jsdata",jsdata["data"])
+                let ff  = try jsdata["data"].rawData()
+                let object = try JSONDecoder().decode((MyWeiboRsp).self, from: ff)
+                
+                completion(object)
             }catch(let error) {
                 print("decode fail:",error)
             }
@@ -153,6 +154,14 @@ struct SearchItem:Codable,Hashable{
     var title_sub:String
 }
 
+struct MyWeiboRsp:Codable{
+    var cards:[MyWeiboItem]
+}
+
+struct MyWeiboItem:Codable,Hashable{
+    var card_type:Int
+    var mblog:Weibo?
+}
 
 
 

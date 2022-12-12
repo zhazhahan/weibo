@@ -10,7 +10,7 @@ import SwiftUI
 struct MyWeibo: View {
     
     @State var loading:Bool = false
-    @State var data:[Weibo] = []
+    @State var data:[MyWeiboItem] = []
     @State private var selectedShow: TVShow?
     
     
@@ -21,10 +21,13 @@ struct MyWeibo: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(data) { tweet in
-                    FeedItemView(weibo: tweet)
-                        .padding()
-                    Divider()
+                ForEach(data,id: \.self) { tweet in
+                    if(tweet.mblog != nil ){
+                        FeedItemView(weibo: tweet.mblog)
+                            .padding()
+                        Divider()
+                    }
+                    
                 }
             }
         }
@@ -64,9 +67,17 @@ struct MyWeibo: View {
         Task{
             loading = true
             Api().getMyWeibo(page: 1, user_id: 2){(res) in
-                data = res.data.statuses
+//                data = res
                 loading = false
-                //print("initData",res)
+                
+
+                
+                data = res.cards.filter({ $0.card_type == 9 })
+                
+                
+                // 关注 https://m.weibo.cn/api/container/getIndex?containerid=231093_-_selffollowed&page=2
+                //
+//                print("关注",res)
             }
         }
     }
