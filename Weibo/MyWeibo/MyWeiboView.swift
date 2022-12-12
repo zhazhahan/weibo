@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Home: View {
+struct MyWeibo: View {
     
     @State var loading:Bool = false
     @State var data:[Weibo] = []
@@ -63,7 +63,7 @@ struct Home: View {
     func initData() {
         Task{
             loading = true
-            Api().getWeibos(page: 1, user_id: 2){(res) in
+            Api().getMyWeibo(page: 1, user_id: 2){(res) in
                 data = res.data.statuses
                 loading = false
                 //print("initData",res)

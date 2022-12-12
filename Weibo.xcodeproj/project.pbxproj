@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0543FCF92941E4930053EF65 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = 0543FCF82941E4930053EF65 /* AttributedText */; };
 		054866A92946C07500D5363C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054866A82946C07500D5363C /* LoginView.swift */; };
+		054866AC2946F12F00D5363C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054866AB2946F12F00D5363C /* SearchView.swift */; };
+		054866AF2946FBCF00D5363C /* MyWeiboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054866AE2946FBCF00D5363C /* MyWeiboView.swift */; };
 		05611D95293999A6003B5377 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 05611D94293999A6003B5377 /* Alamofire */; };
 		05611D9829399A19003B5377 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 05611D9729399A19003B5377 /* SwiftyJSON */; };
 		058031342939AC42007B0737 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058031332939AC42007B0737 /* Api.swift */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		052DFC2229408C5200DE1BBC /* CookieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieManager.swift; sourceTree = "<group>"; };
 		054866A82946C07500D5363C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		054866AB2946F12F00D5363C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		054866AE2946FBCF00D5363C /* MyWeiboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWeiboView.swift; sourceTree = "<group>"; };
 		058031332939AC42007B0737 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		0592EE342942D9A500EE5C2D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0592EE362942DACB00EE5C2D /* FeedItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemView.swift; sourceTree = "<group>"; };
@@ -56,6 +60,22 @@
 				054866A82946C07500D5363C /* LoginView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		054866AA2946F11400D5363C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				054866AB2946F12F00D5363C /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		054866AD2946FBBA00D5363C /* MyWeibo */ = {
+			isa = PBXGroup;
+			children = (
+				054866AE2946FBCF00D5363C /* MyWeiboView.swift */,
+			);
+			path = MyWeibo;
 			sourceTree = "<group>";
 		};
 		0592EE3A2942DB2100EE5C2D /* Api */ = {
@@ -104,12 +124,14 @@
 		86EE024424B233B900D1762E /* Weibo */ = {
 			isa = PBXGroup;
 			children = (
+				054866AD2946FBBA00D5363C /* MyWeibo */,
 				054866A72946C06500D5363C /* Login */,
 				0592EE3A2942DB2100EE5C2D /* Api */,
 				0592EE3D2942DB4900EE5C2D /* Common */,
 				0592EE3C2942DB3900EE5C2D /* Home */,
-				86EE024524B233B900D1762E /* MainView.swift */,
+				054866AA2946F11400D5363C /* Search */,
 				86EE024924B233BC00D1762E /* Assets.xcassets */,
+				86EE024524B233B900D1762E /* MainView.swift */,
 				86EE024E24B233BC00D1762E /* Info.plist */,
 				86EE024F24B233BC00D1762E /* Weibo.entitlements */,
 			);
@@ -195,6 +217,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0592EE3F29431E7100EE5C2D /* PreviewController.swift in Sources */,
+				054866AF2946FBCF00D5363C /* MyWeiboView.swift in Sources */,
+				054866AC2946F12F00D5363C /* SearchView.swift in Sources */,
 				0592EE372942DACB00EE5C2D /* FeedItemView.swift in Sources */,
 				0592EE3B2942DB3100EE5C2D /* CookieManager.swift in Sources */,
 				0592EE352942D9A500EE5C2D /* HomeView.swift in Sources */,

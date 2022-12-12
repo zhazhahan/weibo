@@ -7,7 +7,7 @@
 
 import SwiftUI
 import WebKit
-
+import AttributedText
 @main
 
 struct TwitterApp: App {
@@ -15,6 +15,15 @@ struct TwitterApp: App {
         WindowGroup {
             MainView()
         }
+    }
+    
+    init() {
+        
+        // 配置富文本
+        AttributedText.tags = [
+            "b": { $0.bold().foregroundColor(.blue.opacity(0.7)) },
+            "i": { $0.italic() }
+        ]
     }
 }
 
@@ -56,7 +65,7 @@ struct Sidebar: View {
             Group {
                 
                 NavigationLink {
-                    Home()
+                    Search()
                 } label: {
                     Label("搜索", systemImage: "slider.horizontal.3")
                         .font(.system(size:14))
@@ -64,7 +73,7 @@ struct Sidebar: View {
                 }
                 
                 NavigationLink {
-                    Home()
+                    MyWeibo()
                 } label: {
                     Label("我的", systemImage: "circle.grid.cross")
                         .font(.system(size:14))
@@ -102,13 +111,6 @@ struct GView<Content: View>: View {
             .frame(minWidth:880)
     }
 }
-
-
-
-
-
-
-
 
 
 struct EmptyView: View {

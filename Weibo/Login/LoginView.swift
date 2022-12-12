@@ -27,7 +27,7 @@ struct LoginView: View {
                 Label("完成",systemImage: "arrow.rectanglepath")
                     .foregroundColor(.white)
                     .frame(width: 360,height: 40)
-                    .background(.yellow)
+                    .background(.orange)
             }
             .buttonStyle(.plain)
             .frame(width: 360,height: 480,alignment: .bottom)

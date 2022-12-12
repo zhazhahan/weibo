@@ -59,29 +59,71 @@ class Api{
         backupCookies()
     }
     
-
-    //
-    func getWeibos(page:Int,user_id:Int,completion: @escaping (WeiboRsp) -> Void) {
-        
-        let parameters:[String:Any] = ["Accept":"application/json","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"]
-        AF.request(ApiConfig.baseurl+"/feed/friends",parameters: parameters).validate().responseData { (response) in
+    // Hot Search
+    func getHotSearch(page:Int,user_id:Int,completion: @escaping (HotSearch) -> Void) {
+        let parameters:[String:Any] = [
+            "Accept":"application/json",
+            "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+            "containerid":"231583",
+            "page_type":"searchall"
+        ]
+        AF.request(ApiConfig.baseurl+"/api/container/getIndex",parameters: parameters).validate().responseData { (response) in
             do {
-                
                 let jsdata =  JSON(response.data)
-                print(jsdata["data"])
-                let ff  = try jsdata.rawData()
-                let object = try JSONDecoder().decode(WeiboRsp.self, from: ff)
+                //print("jsdata",jsdata["data"]["cards"][0] )
+                let ff  = try jsdata["data"]["cards"][0].rawData()
+                let object = try JSONDecoder().decode(HotSearch.self, from: ff)
                 completion(object)
-                
-                
-//                let jsdata = JSON(response.data)
-//                let ff  = try jsdata.rawData()
-//                print("jsdata:",jsdata)
             }catch(let error) {
                 print("decode fail:",error)
             }
         }
     }
+    
+    
+    // Timeline
+    func getWeibos(page:Int,user_id:Int,completion: @escaping (WeiboRsp) -> Void) {
+        let parameters:[String:Any] = [
+            "Accept":"application/json",
+            "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+        ]
+        AF.request(ApiConfig.baseurl+"/feed/friends",parameters: parameters).validate().responseData { (response) in
+            do {
+                let jsdata =  JSON(response.data)
+                //print(jsdata["data"])
+                let ff  = try jsdata.rawData()
+                let object = try JSONDecoder().decode(WeiboRsp.self, from: ff)
+                completion(object)
+            }catch(let error) {
+                print("decode fail:",error)
+            }
+        }
+    }
+    
+    
+    // Timeline
+    func getMyWeibo(page:Int,user_id:Int,completion: @escaping (WeiboRsp) -> Void) {
+        let parameters:[String:Any] = [
+            "MWeibo-Pwa":"1",
+            "Accept":"application/json",
+            "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+        ]
+        AF.request(ApiConfig.baseurl+"/profile/info?uid=2103403282",parameters: parameters).validate().responseData { (response) in
+            do {
+                let jsdata =  JSON(response.data)
+                print(jsdata)
+//                let ff  = try jsdata.rawData()
+//                let object = try JSONDecoder().decode(WeiboRsp.self, from: ff)
+//                completion(object)
+            }catch(let error) {
+                print("decode fail:",error)
+            }
+        }
+    }
+    
+    
+    
+    
     
 
 }
@@ -99,6 +141,20 @@ struct Rsp:Codable{
     var count:Int
     var msg:String
 }
+
+
+
+
+struct HotSearch:Codable{
+    var group:[SearchItem]
+}
+
+struct SearchItem:Codable,Hashable{
+    var title_sub:String
+}
+
+
+
 
 
 struct WeiboRsp:Codable{
