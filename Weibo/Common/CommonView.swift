@@ -6,67 +6,9 @@
 //
 
 import SwiftUI
-import WebKit
-
-
-struct LoginView: View {
-    
-    @Binding var showloginSheet:Bool
-    
-    var body: some View {
-        
-        ZStack(){
-            
-            WebView(url: "https://m.weibo.cn")
-                .padding()
-                .frame(width: 480, height: 520)
-            
-            
-            Button(action: {
-                doSetCookie()
-                showloginSheet.toggle()
-            }) {
-                Label("完成",systemImage: "arrow.rectanglepath")
-                    .padding()
-                    .frame(width: 480,height: 120)
-                    .background(.yellow.opacity(0.6))
-            }
-            .frame(width: 480,height: 520,alignment: .bottom)
-        }
-        .frame(width: 480, height: 520)
-    }
-    
-    
-    func doSetCookie(){
-        let dataStore = WKWebsiteDataStore.default()
-        dataStore.httpCookieStore.getAllCookies({ (cookies) in
-            //print("---------cookies---------",cookies)
-            for ( cookieProperties ) in cookies {
-                print("---------cookieProperties---------",cookieProperties)
-                    HTTPCookieStorage.shared.setCookie(cookieProperties)
-            }
-        })
-    }
-}
 
 
 
-struct WebView: NSViewRepresentable {
-    let url: String
-    func makeNSView(context: Context) -> WKWebView {
-
-        guard let url = URL(string: self.url) else {
-            return WKWebView()
-        }
-
-        let webview = WKWebView()
-        let request = URLRequest(url: url)
-        webview.load(request)
-
-        return webview
-    }
-    func updateNSView(_ nsView: WKWebView, context: Context) { }
-}
 
 
 

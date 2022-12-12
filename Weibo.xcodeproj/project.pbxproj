@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0543FCF92941E4930053EF65 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = 0543FCF82941E4930053EF65 /* AttributedText */; };
+		054866A92946C07500D5363C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054866A82946C07500D5363C /* LoginView.swift */; };
 		05611D95293999A6003B5377 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 05611D94293999A6003B5377 /* Alamofire */; };
 		05611D9829399A19003B5377 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 05611D9729399A19003B5377 /* SwiftyJSON */; };
 		058031342939AC42007B0737 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058031332939AC42007B0737 /* Api.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		052DFC2229408C5200DE1BBC /* CookieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieManager.swift; sourceTree = "<group>"; };
+		054866A82946C07500D5363C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		058031332939AC42007B0737 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		0592EE342942D9A500EE5C2D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0592EE362942DACB00EE5C2D /* FeedItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemView.swift; sourceTree = "<group>"; };
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		054866A72946C06500D5363C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				054866A82946C07500D5363C /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		0592EE3A2942DB2100EE5C2D /* Api */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +104,7 @@
 		86EE024424B233B900D1762E /* Weibo */ = {
 			isa = PBXGroup;
 			children = (
+				054866A72946C06500D5363C /* Login */,
 				0592EE3A2942DB2100EE5C2D /* Api */,
 				0592EE3D2942DB4900EE5C2D /* Common */,
 				0592EE3C2942DB3900EE5C2D /* Home */,
@@ -189,6 +200,7 @@
 				0592EE352942D9A500EE5C2D /* HomeView.swift in Sources */,
 				86EE024624B233B900D1762E /* MainView.swift in Sources */,
 				058031342939AC42007B0737 /* Api.swift in Sources */,
+				054866A92946C07500D5363C /* LoginView.swift in Sources */,
 				0592EE392942DB0000EE5C2D /* CommonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
