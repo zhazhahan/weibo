@@ -19,7 +19,7 @@ class Api{
     func getHotSearch(page:Int,user_id:Int,completion: @escaping (HotSearch) -> Void) {
         let parameters:[String:Any] = [
             "Accept":"application/json",
-            "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+            "user-agent":"Weibo For Mac",
             "containerid":"231583",
             "page_type":"searchall"
         ]
@@ -42,7 +42,7 @@ class Api{
         let parameters:[String:Any] = [
             "max_id":max_id,
             "Accept":"application/json",
-            "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+            "user-agent":"Weibo For Mac"
         ]
         AF.request(ApiConfig.baseurl+"/feed/friends",parameters: parameters).validate().responseData { (response) in
             do {
@@ -63,7 +63,7 @@ class Api{
         let parameters:[String:Any] = [
             "containerid":"2304132103403282_-_WEIBO_SECOND_PROFILE_WEIBO",
             "Accept":"application/json",
-            "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+            "user-agent":"Weibo For Mac"
         ]
         AF.request(ApiConfig.baseurl+"/api/container/getIndex",parameters: parameters).validate().responseData { (response) in
             do {
