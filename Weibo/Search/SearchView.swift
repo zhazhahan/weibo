@@ -20,32 +20,78 @@ struct Search: View {
     
     @State var loading:Bool = false
     @State var data:[SearchItem] = []
-    
+    @State private var keyword: String = ""
 
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns,spacing: 10){
-                ForEach(data,id: \.self) { item in
-                    Button(action: {
-                        
-                    }, label: {
-                        Text("# \(item.title_sub)")
-                            .padding(.vertical,10)
-                            .padding(.leading,10)
-                            .foregroundColor(.orange)
-                    })
-                    .buttonStyle(.plain)
-                    .frame(width: 240,alignment: .leading)
-                    .background(.yellow.opacity(0.1))
-                    .cornerRadius(5)
-                    .clipped()
-                    .border(.gray.opacity(0.1))
+            
+            GeometryReader { geometry in
+                HStack(alignment: .top,spacing: 0) {
                     
+                    VStack(alignment: .leading,spacing: 30){
+                        
+                        VStack(alignment: .leading,spacing: 16){
+                            Text("🔎 搜索")
+                                .font(.title2)
+                                .foregroundColor(.orange)
+                                .padding(.top,20)
+                            
+                            TextField(
+                                "搜索",
+                                text: $keyword
+                            )
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .padding(.vertical,8)
+                            .padding(.horizontal,10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius:16).stroke(Color.black.opacity(0.2),lineWidth:0.5)
+                            )
+                        }
+                        
+                        
+                        
+//                        Text("📢 超话")
+//                            .font(.title2)
+//                            .foregroundColor(.orange)
+//                            .padding(.vertical,20)
+                            
+                    }
+                    .foregroundColor(.black)
+                    .padding()
+                    .frame(width: geometry.size.width * 0.67,alignment: .topLeading)
+                    //.background(.orange.opacity(0.1))
+                    
+                    
+                    
+                    VStack(alignment: .leading){
+                        Text("🔥 热门搜索")
+                            .font(.title2)
+                            .foregroundColor(.orange)
+                            .padding(.top,20)
+                            .padding(.bottom,10)
+                        
+                        ForEach(data,id: \.self) { item in
+                            Button(action: {
+                                
+                            }, label: {
+                                Text("# \(item.title_sub)")
+                                    .padding(.bottom,6)
+                                    .padding(.leading,6)
+                                    .foregroundColor(.orange)
+                            })
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .foregroundColor(.black)
+                    .padding()
+                    .frame(width: geometry.size.width * 0.33,alignment: .topLeading)
                 }
             }
-            .padding(.top,40)
+            
+            
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationTitle(loading ?  "Loading..." : "热门搜索")

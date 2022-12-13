@@ -12,12 +12,7 @@ struct Home: View {
     @State var loading:Bool = false
     @State var data:[Weibo] = []
     @State private var selectedShow: TVShow?
-    
-    
-    @State private var showloginSheet = false
-    
 
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -32,17 +27,6 @@ struct Home: View {
         .navigationTitle(loading ?  "Loading..." : "首页")
         .background(Color.white)
         .toolbar {
-            ToolbarItem(placement: .status) {
-                Button(action: {
-                    showloginSheet.toggle()
-                }) {
-                    Image(systemName: "person.crop.circle.fill")
-                }
-                .sheet(isPresented: $showloginSheet ) {
-                    LoginView(showloginSheet:$showloginSheet)
-                }
-            }
-            
             ToolbarItem(placement: .status) {
                 Button(action: {
                     initData()

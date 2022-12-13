@@ -47,43 +47,66 @@ struct MainView: View {
 struct Sidebar: View {
     @State var selection: Int?
     
+    
+    @State private var showloginSheet = false
+    
+    
     var body: some View {
-        
-        List(selection: self.$selection) {
-            Group {
-                NavigationLink {
-                    Home()
-                } label: {
-                    Label("时间线", systemImage: "server.rack")
-                        .font(.system(size:14))
-                        .padding(.vertical,4)
+        GeometryReader { proxy in
+            VStack(alignment: .leading){
+                List(selection: self.$selection) {
+                    Group {
+                        NavigationLink {
+                            Home()
+                        } label: {
+                            Label("时间线", systemImage: "server.rack")
+                                .font(.system(size:14))
+                                .padding(.vertical,4)
+                        }
+                        .badge(4)
+                    }
+                    
+                    
+                    Group {
+                        NavigationLink {
+                            Search()
+                        } label: {
+                            Label("搜索", systemImage: "slider.horizontal.3")
+                                .font(.system(size:14))
+                                .padding(.vertical,4)
+                        }
+                        
+                        NavigationLink {
+                            MyWeibo()
+                        } label: {
+                            Label("我的", systemImage: "circle.grid.cross")
+                                .font(.system(size:14))
+                                .padding(.vertical,4)
+                        }
+                    }
                 }
-                .badge(4)
-            }
-            
-            
-            Group {
+                .listStyle(SidebarListStyle())
                 
-                NavigationLink {
-                    Search()
-                } label: {
-                    Label("搜索", systemImage: "slider.horizontal.3")
-                        .font(.system(size:14))
-                        .padding(.vertical,4)
-                }
                 
-                NavigationLink {
-                    MyWeibo()
-                } label: {
-                    Label("我的", systemImage: "circle.grid.cross")
-                        .font(.system(size:14))
-                        .padding(.vertical,4)
+                Button(action: {
+                    showloginSheet.toggle()
+                }) {
+                    HStack(spacing: 6){
+                        Image(systemName:"person.crop.circle.fill").resizable().frame(width: 24,height: 24)
+                        Text("角瓦尼")
+                    }
                 }
-                   
+                .padding(.horizontal,20)
+                .frame(width: proxy.size.width,alignment: .leading)
+                .buttonStyle(.plain)
+                //.background(.pink)
+                .sheet(isPresented: $showloginSheet ) {
+                    LoginView(showloginSheet:$showloginSheet)
+                }
             }
         }
         .padding(.top,30)
-        .listStyle(SidebarListStyle())
+        .padding(.bottom,10)
         .background(Image("menu_bg").blur(radius: 5))
         .frame(minWidth: 220, idealWidth: 220, maxWidth: 220, maxHeight: .infinity)
     }

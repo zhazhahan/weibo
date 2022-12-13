@@ -21,13 +21,12 @@ struct MyWeibo: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(data,id: \.self) { tweet in
+                ForEach(data) { tweet in
                     if(tweet.mblog != nil ){
                         FeedItemView(weibo: tweet.mblog)
                             .padding()
                         Divider()
                     }
-                    
                 }
             }
         }
@@ -70,9 +69,9 @@ struct MyWeibo: View {
 //                data = res
                 loading = false
                 
+//                let jsstr = res.cards.filter({ $0.card_type == 9 }).toJSONString();
 
-                
-                data = res.cards.filter({ $0.card_type == 9 })
+//                print("jsstr",jsstr)
                 
                 
                 // 关注 https://m.weibo.cn/api/container/getIndex?containerid=231093_-_selffollowed&page=2
