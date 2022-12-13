@@ -25,10 +25,10 @@ struct MyWeiboRsp:Codable{
     var cards:[MyWeiboItem]
 }
 
-struct MyWeiboItem:Codable,Identifiable{
-    var id = UUID()
+struct MyWeiboItem:Codable{
+//    var id = UUID()
     var card_type:Int
-    var mblog:Weibo
+    var mblog:Weibo?
 }
 
 struct WeiboRsp:Codable{

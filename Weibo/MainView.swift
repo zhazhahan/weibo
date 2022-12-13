@@ -93,7 +93,7 @@ struct Sidebar: View {
                 }) {
                     HStack(spacing: 6){
                         Image(systemName:"person.crop.circle.fill").resizable().frame(width: 24,height: 24)
-                        Text("MaoMao")
+                        Text("角瓦尼")
                     }
                 }
                 .padding(.horizontal,20)

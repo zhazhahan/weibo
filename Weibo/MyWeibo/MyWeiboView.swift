@@ -10,7 +10,7 @@ import SwiftUI
 struct MyWeibo: View {
     
     @State var loading:Bool = false
-    @State var data:[MyWeiboItem] = []
+    @State var data:[Weibo] = []
     @State private var selectedShow: TVShow?
     
     
@@ -22,29 +22,16 @@ struct MyWeibo: View {
         ScrollView {
             VStack(spacing: 0) {
                 ForEach(data) { tweet in
-                    if(tweet.mblog != nil ){
-                        FeedItemView(weibo: tweet.mblog)
-                            .padding()
-                        Divider()
-                    }
+                    FeedItemView(weibo: tweet)
+                        .padding()
+                    Divider()
                 }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationTitle(loading ?  "Loading..." : "首页")
         .background(Color.white)
-        .toolbar {
-            ToolbarItem(placement: .status) {
-                Button(action: {
-                    showloginSheet.toggle()
-                }) {
-                    Image(systemName: "person.crop.circle.fill")
-                }
-                .sheet(isPresented: $showloginSheet ) {
-                    LoginView(showloginSheet:$showloginSheet)
-                }
-            }
-            
+        .toolbar {           
             ToolbarItem(placement: .status) {
                 Button(action: {
                     initData()
@@ -66,17 +53,25 @@ struct MyWeibo: View {
         Task{
             loading = true
             Api().getMyWeibo(page: 1, user_id: 2){(res) in
-//                data = res
-                loading = false
-                
-//                let jsstr = res.cards.filter({ $0.card_type == 9 }).toJSONString();
 
-//                print("jsstr",jsstr)
-                
-                
+                loading = false
+
+                // 数据处理
+                let jsstr = res.cards.filter({ $0.card_type == 9 });
+                var myweibo:[Weibo] = []
+                for index in 0 ..< jsstr.count-1 {
+                    if( jsstr[index].mblog != nil ){
+                        if let weiboitem = jsstr[index].mblog {
+                            print(weiboitem.text)
+                            myweibo.append(weiboitem)
+                        }else{
+                            
+                        }
+                    }
+                }
+                data = myweibo
+                //print("myweibo",myweibo)
                 // 关注 https://m.weibo.cn/api/container/getIndex?containerid=231093_-_selffollowed&page=2
-                //
-//                print("关注",res)
             }
         }
     }

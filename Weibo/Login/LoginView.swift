@@ -24,10 +24,10 @@ struct LoginView: View {
                 doSetCookie()
                 showloginSheet.toggle()
             }) {
-                Label("完成",systemImage: "arrow.rectanglepath")
+                Label("登陆完成",systemImage: "arrow.rectanglepath")
                     .foregroundColor(.white)
                     .frame(width: 360,height: 40)
-//                    .background(.orange)
+                    .background(.orange)
             }
             .buttonStyle(.plain)
             .frame(width: 360,height: 480,alignment: .bottom)
