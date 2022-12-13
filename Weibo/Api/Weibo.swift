@@ -39,6 +39,7 @@ struct WeiboRsp:Codable{
 
 struct WeiboData:Codable{
     var statuses:[Weibo]
+    var max_id:Int?
 }
 
 struct Weibo:Codable,Identifiable{

@@ -23,26 +23,24 @@ struct PreviewView: View {
     var body: some View {
 
         VStack(){
-            ScrollView(){
-                AsyncImage(url: URL(string:cimg )) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    Color.gray.opacity(0.1).frame(width: 340,height: 340)
-                }
-                .frame(width:340)
-                //.background(.pink)
+            AsyncImage(url: URL(string:cimg )) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(maxHeight:500)
+            } placeholder: {
+                Color.gray.opacity(0.1).frame(width: 400,height: 300)
             }
-            .frame(idealWidth: 340,maxWidth: 340, maxHeight: 520)
-            
+            .frame(width: 400)
 
             Spacer()
             
             HStack(){
-                Button("上一张") {
+                
+                Button( "上一张") {
                     showPre()
                 }
+                .foregroundColor( index != 0  ? .blue : .gray)
                 .buttonStyle(.plain)
                 
                 Button(action: {
@@ -52,14 +50,15 @@ struct PreviewView: View {
                 })
                 .buttonStyle(.plain)
                 
-                Button("下一张") {
+                Button( "下一张") {
                     showNext()
                 }
+                .foregroundColor( index < imgs.count-1 ? .blue : .gray)
                 .buttonStyle(.plain)
             }
-            .frame(width: 340,height: 40)
+            .frame(width: 400,height: 40)
         }
-        .frame(width: 340)
+        .frame(width: 400)
         .task{
             //Init
             cimg = imgs[index].large.url

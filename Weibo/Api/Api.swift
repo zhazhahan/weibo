@@ -38,8 +38,9 @@ class Api{
     
     
     // Timeline
-    func getWeibos(page:Int,user_id:Int,completion: @escaping (WeiboRsp) -> Void) {
+    func getWeibos(max_id:Int?,completion: @escaping (WeiboRsp) -> Void) {
         let parameters:[String:Any] = [
+            "max_id":max_id,
             "Accept":"application/json",
             "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
         ]
@@ -57,7 +58,7 @@ class Api{
     }
     
     
-    // Timeline
+    // MyWeibo
     func getMyWeibo(page:Int,user_id:Int,completion: @escaping (MyWeiboRsp) -> Void) {
         let parameters:[String:Any] = [
             "containerid":"2304132103403282_-_WEIBO_SECOND_PROFILE_WEIBO",
@@ -66,12 +67,20 @@ class Api{
         ]
         AF.request(ApiConfig.baseurl+"/api/container/getIndex",parameters: parameters).validate().responseData { (response) in
             do {
-                let jsdata =  JSON(response.data)
-                //print("4-jsdata",jsdata["data"])
-                let ff  = try jsdata["data"].rawData()
-                let object = try JSONDecoder().decode((MyWeiboRsp).self, from: ff)
+                //let jsdata =  JSON(response.data)
                 
-                completion(object)
+                
+//                let decoder = JSONDecoder()
+//                let rates = try decoder.decode([Spot].self, from: data)
+//                let rate = rates.filter { $0.id == "36" }
+//                print(rate)
+                
+                
+                //print("4-jsdata",jsdata["data"])
+//                let ff  = try jsdata["data"].rawData()
+//                let object = try JSONDecoder().decode((MyWeiboRsp).self, from: ff)
+                
+//                completion(object)
             }catch(let error) {
                 print("decode fail:",error)
             }

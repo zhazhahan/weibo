@@ -76,7 +76,6 @@ struct FeedItemView: View {
                     
                     if( weibo.pics != nil ){
                         Spacer()
-                        
                         LazyVGrid(columns: columns,spacing: 10){
                             ForEach(weibo.pics ?? [], id: \.self) { img in
                                 Button(action: {
