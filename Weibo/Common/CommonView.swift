@@ -27,7 +27,7 @@ struct PreviewView: View {
                 image
                     .resizable()
                     .scaledToFill()
-                    .frame(maxHeight:500)
+                    .frame(maxHeight:480)
             } placeholder: {
                 Color.gray.opacity(0.1).frame(width: 400,height: 300)
             }
@@ -57,6 +57,7 @@ struct PreviewView: View {
                 .buttonStyle(.plain)
             }
             .frame(width: 400,height: 40)
+            .background(.white)
         }
         .frame(width: 400)
         .task{
