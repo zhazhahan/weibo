@@ -98,7 +98,7 @@ struct Retweeted:Codable{
         return modifiedString
     }
     let created_at:String
-    let user:WeiboUser
+    let user:WeiboUser?
 }
 
 

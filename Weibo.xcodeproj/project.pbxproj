@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		053585482949606B002C37AC /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053585472949606B002C37AC /* MessageView.swift */; };
 		0543FCF92941E4930053EF65 /* AttributedText in Frameworks */ = {isa = PBXBuildFile; productRef = 0543FCF82941E4930053EF65 /* AttributedText */; };
 		054866A92946C07500D5363C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054866A82946C07500D5363C /* LoginView.swift */; };
 		054866AC2946F12F00D5363C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054866AB2946F12F00D5363C /* SearchView.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		052DFC2229408C5200DE1BBC /* CookieManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieManager.swift; sourceTree = "<group>"; };
+		053585472949606B002C37AC /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		054866A82946C07500D5363C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		054866AB2946F12F00D5363C /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		054866AE2946FBCF00D5363C /* MyWeiboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWeiboView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0535854629496059002C37AC /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				053585472949606B002C37AC /* MessageView.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		054866A72946C06500D5363C /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +137,7 @@
 		86EE024424B233B900D1762E /* Weibo */ = {
 			isa = PBXGroup;
 			children = (
+				0535854629496059002C37AC /* Message */,
 				054866AD2946FBBA00D5363C /* MyWeibo */,
 				054866A72946C06500D5363C /* Login */,
 				0592EE3A2942DB2100EE5C2D /* Api */,
@@ -219,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053585482949606B002C37AC /* MessageView.swift in Sources */,
 				0592EE3F29431E7100EE5C2D /* PreviewController.swift in Sources */,
 				054866AF2946FBCF00D5363C /* MyWeiboView.swift in Sources */,
 				054866AC2946F12F00D5363C /* SearchView.swift in Sources */,

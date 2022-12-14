@@ -46,8 +46,8 @@ class Api{
         ]
         AF.request(ApiConfig.baseurl+"/feed/friends",parameters: parameters).validate().responseData { (response) in
             do {
-                let jsdata =  JSON(response.data)
-                //print(jsdata["data"])
+                let jsdata = JSON(response.data)
+                //print(jsdata)
                 let ff  = try jsdata.rawData()
                 let object = try JSONDecoder().decode(WeiboRsp.self, from: ff)
                 completion(object)
@@ -61,7 +61,7 @@ class Api{
     // MyWeibo
     func getMyWeibo(page:Int,user_id:Int,completion: @escaping (MyWeiboRsp) -> Void) {
         let parameters:[String:Any] = [
-            "containerid":"2304132103403282_-_WEIBO_SECOND_PROFILE_WEIBO",
+            "containerid":"2304136822380193",
             "Accept":"application/json",
             "user-agent":"Weibo For Mac"
         ]
@@ -72,7 +72,7 @@ class Api{
                 let object = try JSONDecoder().decode((MyWeiboRsp).self, from: ff)
                 completion(object)
             }catch(let error) {
-                print("decode fail:",error)
+                //print("decode fail:",error)
             }
         }
     }

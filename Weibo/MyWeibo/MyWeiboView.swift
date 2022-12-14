@@ -31,7 +31,7 @@ struct MyWeibo: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationTitle(loading ?  "Loading..." : "首页")
         .background(Color.white)
-        .toolbar {           
+        .toolbar {
             ToolbarItem(placement: .status) {
                 Button(action: {
                     initData()
@@ -62,10 +62,8 @@ struct MyWeibo: View {
                 for index in 0 ..< jsstr.count-1 {
                     if( jsstr[index].mblog != nil ){
                         if let weiboitem = jsstr[index].mblog {
-                            print(weiboitem.text)
+                            //print(weiboitem.text)
                             myweibo.append(weiboitem)
-                        }else{
-                            
                         }
                     }
                 }

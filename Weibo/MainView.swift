@@ -11,6 +11,7 @@ import AttributedText
 @main
 
 struct TwitterApp: App {
+    
     var body: some Scene {
         WindowGroup {
             MainView()
@@ -63,11 +64,19 @@ struct Sidebar: View {
                                 .font(.system(size:14))
                                 .padding(.vertical,4)
                         }
-                        .badge(4)
                     }
                     
                     
                     Group {
+                        NavigationLink {
+                            MessageView()
+                        } label: {
+                            Label("消息", systemImage: "bubble.left")
+                                .font(.system(size:14))
+                                .padding(.vertical,4)
+                        }
+                        .badge(4)
+                        
                         NavigationLink {
                             Search()
                         } label: {
