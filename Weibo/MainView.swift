@@ -85,6 +85,15 @@ struct Sidebar: View {
                                 .padding(.vertical,4)
                         }
                         
+                        
+                        NavigationLink {
+                            AttentionView()
+                        } label: {
+                            Label("收藏", systemImage: "archivebox")
+                                .font(.system(size:14))
+                                .padding(.vertical,4)
+                        }
+                        
                         NavigationLink {
                             MyWeibo()
                         } label: {

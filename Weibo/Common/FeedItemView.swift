@@ -23,16 +23,25 @@ struct FeedItemView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-                AsyncImage(url: URL(string: weibo.user.avatar_hd)) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    Color.gray.opacity(0.1)
+            
+                //ProfileView
+                NavigationLink {
+                    ProfileView(uid: weibo.user.id)
+                } label: {
+                    AsyncImage(url: URL(string: weibo.user.avatar_hd)) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        Color.gray.opacity(0.1)
+                    }
+                    .frame(width: 40,height: 40)
+                    .cornerRadius(40)
+                    .clipped()
                 }
+                .buttonStyle(.plain)
                 .frame(width: 40,height: 40)
-                .cornerRadius(40)
-                .clipped()
+                
                 
                 
                 

@@ -21,6 +21,10 @@ struct SearchItem:Codable,Hashable{
     var title_sub:String
 }
 
+struct ProfileRsp:Codable{
+    var cards:[MyWeiboItem]
+}
+
 struct MyWeiboRsp:Codable{
     var cards:[MyWeiboItem]
 }

@@ -57,7 +57,26 @@ class Api{
         }
     }
     
+    // MyWeibo
+    func getProfile(uid:Int,completion: @escaping (WeiboRsp) -> Void) {
+        let parameters:[String:Any] = [
+            "uid":uid,
+            "Accept":"application/json",
+            "user-agent":"Weibo For Mac"
+        ]
+        AF.request(ApiConfig.baseurl+"/profile/info",parameters: parameters).validate().responseData { (response) in
+            do {
+                let jsdata =  JSON(response.data)
+                let ff  = try jsdata.rawData()
+                let object = try JSONDecoder().decode((WeiboRsp).self, from: ff)
+                completion(object)
+            }catch(let error) {
+                //print("decode fail:",error)
+            }
+        }
+    }
     
+
     // MyWeibo
     func getMyWeibo(page:Int,user_id:Int,completion: @escaping (MyWeiboRsp) -> Void) {
         let parameters:[String:Any] = [
