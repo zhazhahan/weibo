@@ -13,35 +13,46 @@ struct MessageView: View {
     
     var body: some View {
         ScrollView(){
-            TabView {
-                Text("@我").background(.white)
-                    .tabItem {
-                        Image(systemName: "at")
-                        Text("@我")
-                    }
-                
-                Text("评论")
-                    .tabItem {
-                        Image(systemName: "at")
-                        Text("评论")
-                    }
-                Text("点赞")
-                    .tabItem {
-    //                    Image(systemImage: "hand.thumbsup")
-                        Text("赞")
-                    }
-                
-                Text("转发")
-                    .tabItem {
-    //                    Image(systemImage: "arrow.2.squarepath")
-                        Text("转发")
-                    }
+            
+            HStack(){
+                HStack(){
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("@我").font(.title3).foregroundColor(.orange)
+                    })
+                    .buttonStyle(.plain)
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("评论").font(.title3).foregroundColor(.gray)
+                    })
+                    .buttonStyle(.plain)
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("点赞").font(.title3).foregroundColor(.gray)
+                    })
+                    .buttonStyle(.plain)
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("转发").font(.title3).foregroundColor(.gray)
+                    })
+                    .buttonStyle(.plain)
+                }
+                .padding(.vertical,20)
+                .padding(.horizontal,10)
+                Spacer()
             }
-            //.background(.pink)
-            .padding(20)
+            .frame(alignment: .leading)
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationTitle(loading ?  "Loading..." : "热门搜索")
+        .navigationTitle(loading ?  "Loading..." : "消息")
         .background(Color.white)
         .toolbar {
             ToolbarItem(placement: .status) {

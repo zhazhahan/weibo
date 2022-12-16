@@ -47,26 +47,30 @@ struct ProfileView: View {
     }
     
     func initData() {
+        //print("initData-2")
         Task{
             loading = true
+            //print("initData-2")
+            
             Api().getProfile(uid: uid){(res) in
-
+                //print("initData-2")
                 loading = false
                 
-                print("getProfile",res)
-
-//                // 数据处理
-//                let jsstr = res.cards.filter({ $0.card_type == 9 });
-//                var myweibo:[Weibo] = []
-//                for index in 0 ..< jsstr.count-1 {
-//                    if( jsstr[index].mblog != nil ){
-//                        if let weiboitem = jsstr[index].mblog {
-//                            //print(weiboitem.text)
-//                            myweibo.append(weiboitem)
-//                        }
-//                    }
-//                }
-//                data = myweibo
+                // 数据处理
+                let jsstr = res.cards.filter({ $0.card_type == 9 });
+                var myweibo:[Weibo] = []
+                for index in 0 ..< jsstr.count-1 {
+                    if( jsstr[index].mblog != nil ){
+                        if let weiboitem = jsstr[index].mblog {
+                            //print(weiboitem.text)
+                            myweibo.append(weiboitem)
+                        }
+                    }
+                }
+                data = myweibo
+                
+                //print("jsstr",jsstr)
+//                data = jsstr
                 //print("myweibo",myweibo)
             }
         }

@@ -16,6 +16,13 @@ struct TwitterApp: App {
         WindowGroup {
             MainView()
         }
+        
+
+        WindowGroup("My Info Window") {
+            InfoView()
+        }
+        .handlesExternalEvents(matching: ["infowindow"])
+        
     }
     
     init() {
@@ -27,6 +34,17 @@ struct TwitterApp: App {
         ]
     }
 }
+
+
+
+
+struct InfoView: View {
+    var body: some View {
+        Text("Some text goes here")
+            .padding(60)
+    }
+}
+
 
 
 struct MainView: View {
@@ -98,6 +116,15 @@ struct Sidebar: View {
                             MyWeibo()
                         } label: {
                             Label("我的", systemImage: "circle.grid.cross")
+                                .font(.system(size:14))
+                                .padding(.vertical,4)
+                        }
+                        
+                        
+                        NavigationLink {
+                            ProfileView(uid: 1744050387)
+                        } label: {
+                            Label("关注", systemImage: "moon.stars")
                                 .font(.system(size:14))
                                 .padding(.vertical,4)
                         }

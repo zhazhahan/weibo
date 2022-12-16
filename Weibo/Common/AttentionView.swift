@@ -29,7 +29,7 @@ struct AttentionView: View {
                         
                     }, label: {
                         
-                        HStack{
+                        HStack(spacing: 10){
                             AsyncImage(url: URL(string: "https://tvax1.sinaimg.cn/crop.0.0.512.512.180/c59b2853ly8gc2xbabmprj20e80e8q3j.jpg?KID=imgbed,tva&Expires=1670998169&ssig=xBaaoQqIAU")) { image in
                                 image
                                     .resizable()
@@ -45,6 +45,8 @@ struct AttentionView: View {
                                 Text("月亮与六便士")
                                 Spacer()
                                 Text("那是我的自由意志").font(.caption2).foregroundColor(.gray)
+                                Spacer()
+                                Spacer()
                                 Spacer()
                                 Spacer()
                             }

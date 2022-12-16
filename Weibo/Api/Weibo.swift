@@ -103,6 +103,8 @@ struct Retweeted:Codable{
     }
     let created_at:String
     let user:WeiboUser?
+    
+    let pics:[WeiboPic]?
 }
 
 

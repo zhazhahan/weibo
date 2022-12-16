@@ -19,8 +19,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.zha.weibo</string>
 			<key>CFBundleURLSchemes</key>
-			<array/>
+			<array>
+				<string>windowapp</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>

@@ -19,12 +19,11 @@ struct FeedItemView: View {
     @State var showLikeWindow = false
     @State var showCommentWindow = false
     @State var showRetweetWindow = false
-    
+    @State var selection: Int?
     
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             
-                //ProfileView
                 NavigationLink {
                     ProfileView(uid: weibo.user.id)
                 } label: {
@@ -79,6 +78,37 @@ struct FeedItemView: View {
                             .background(.gray.opacity(0.1))
                             .cornerRadius(5)
                             .clipped()
+                        
+                        // IMG
+                        if( weibo.retweeted_status?.pics != nil ){
+                            Spacer()
+                            LazyVGrid(columns: columns,spacing: 10){
+                                ForEach(weibo.retweeted_status?.pics ?? [], id: \.self) { img in
+                                    Button(action: {
+                                        showingSheet.toggle()
+                                    }, label: {
+                                        AsyncImage(url: URL(string: img.url)) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                        } placeholder: {
+                                            Color.gray.opacity(0.1)
+                                        }
+                                        .frame(width: 100,height: 100)
+                                    })
+                                    .frame(width: 100,height: 100)
+                                    .buttonStyle(.plain)
+                                    .cornerRadius(5)
+                                    .clipped()
+                                    .border(.gray.opacity(0.1))
+                                    .sheet(isPresented: $showingSheet ) {
+                                        PreviewView(imgs: weibo.retweeted_status?.pics ?? [])
+                                    }
+                                }
+                            }
+                            .frame(width: 340)
+                            //.background(.pink)
+                        }
                     }
                     
                     

@@ -58,17 +58,20 @@ class Api{
     }
     
     // MyWeibo
-    func getProfile(uid:Int,completion: @escaping (WeiboRsp) -> Void) {
+    func getProfile(uid:Int,completion: @escaping (MyWeiboRsp) -> Void) {
         let parameters:[String:Any] = [
             "uid":uid,
+            "page":1,
+            "containerid":1076033315279955,
             "Accept":"application/json",
             "user-agent":"Weibo For Mac"
         ]
-        AF.request(ApiConfig.baseurl+"/profile/info",parameters: parameters).validate().responseData { (response) in
+        AF.request(ApiConfig.baseurl+"/api/container/getIndex",parameters: parameters).validate().responseData { (response) in
             do {
                 let jsdata =  JSON(response.data)
-                let ff  = try jsdata.rawData()
-                let object = try JSONDecoder().decode((WeiboRsp).self, from: ff)
+                //print("initData-jsdata",jsdata["data"])
+                let ff  = try jsdata["data"].rawData()
+                let object = try JSONDecoder().decode((MyWeiboRsp).self, from: ff)
                 completion(object)
             }catch(let error) {
                 //print("decode fail:",error)
