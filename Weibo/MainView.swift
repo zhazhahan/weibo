@@ -65,8 +65,8 @@ struct Main: View {
                 }
                 .buttonStyle(.plain)
                 .padding()
-
             }
+            .background(Image("blue"))
 
 
 
