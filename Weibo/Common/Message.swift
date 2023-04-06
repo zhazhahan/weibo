@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageView: View {
+struct Message: View {
 
     @State var loading:Bool = false
     

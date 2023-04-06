@@ -6,26 +6,51 @@
 //
 
 import SwiftUI
+import StackNavigationView
 
-struct MyWeibo: View {
-    
+
+struct Home: View {
+
+    @State var tips:Bool = false
+
     @State var loading:Bool = false
+    @State var page:Int = 1
+    @State var max_id:Int?
+
+
+    
     @State var data:[Weibo] = []
     @State private var selectedShow: TVShow?
-    
-    
-    @State private var showloginSheet = false
-    
 
-    
     var body: some View {
         ScrollView {
+
+            if( tips ){
+                Text("😼 请登录，并在登录成功后点击[登录完成]按钮.")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(.accentColor)
+                    .padding(.top,200)
+            }
+
+
             VStack(spacing: 0) {
                 ForEach(data) { tweet in
-                    FeedItemView(weibo: tweet)
-                        .padding()
+                    FeedItemView(weibo: tweet).padding()
                     Divider()
                 }
+            }
+            
+            // 下一页
+            if( !loading && data.count > 0 ){
+                Button(action: {
+                    page+=1
+                    initData()
+                }) {
+                    Text("下一页")
+                }
+                .padding()
+                .buttonStyle(.plain)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -49,28 +74,24 @@ struct MyWeibo: View {
         }
     }
     
+    func refreshData(){
+        max_id = nil
+        initData()
+    }
+    
     func initData() {
         Task{
             loading = true
-            Api().getMyWeibo(page: 1, user_id: 2){(res) in
-
+            Api().getWeibos(max_id: max_id){(res) in
+                data = res.data.statuses
+                max_id = res.data.max_id
                 loading = false
-
-                // 数据处理
-                let jsstr = res.cards.filter({ $0.card_type == 9 });
-                var myweibo:[Weibo] = []
-                for index in 0 ..< jsstr.count-1 {
-                    if( jsstr[index].mblog != nil ){
-                        if let weiboitem = jsstr[index].mblog {
-                            //print(weiboitem.text)
-                            myweibo.append(weiboitem)
-                        }
-                    }
-                }
-                data = myweibo
-                //print("myweibo",myweibo)
-                // 关注 https://m.weibo.cn/api/container/getIndex?containerid=231093_-_selffollowed&page=2
             }
+            loading = false
+
+//            if( data.count == 0 ){
+//                tips = true
+//            }
         }
     }
     

@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "stacknavigationview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lbrndnr/StackNavigationView",
+      "state" : {
+        "branch" : "master",
+        "revision" : "285e9d633ed22430445b8c769a769f762607594b"
+      }
+    },
+    {
       "identity" : "swiftyjson",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SwiftyJSON/SwiftyJSON.git",

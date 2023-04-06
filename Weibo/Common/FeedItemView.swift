@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AttributedText
+import StackNavigationView
 
 struct FeedItemView: View {
     @State var weibo: Weibo
@@ -23,10 +24,10 @@ struct FeedItemView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            
-                NavigationLink {
+
+                StackNavigationLink(destination:
                     ProfileView(uid: weibo.user.id)
-                } label: {
+                , label: {
                     AsyncImage(url: URL(string: weibo.user.avatar_hd)) { image in
                         image
                             .resizable()
@@ -37,11 +38,11 @@ struct FeedItemView: View {
                     .frame(width: 40,height: 40)
                     .cornerRadius(40)
                     .clipped()
-                }
+                })
                 .buttonStyle(.plain)
                 .frame(width: 40,height: 40)
                 
-                
+
                 
                 
                 VStack(alignment: .leading, spacing: 2) {
@@ -70,14 +71,30 @@ struct FeedItemView: View {
                         .foregroundColor(.primary)
                     
                     if( weibo.retweeted_status != nil ){
-                        AttributedText( "<b>\(weibo.retweeted_status?.user?.screen_name ?? "")</b>：\(weibo.retweeted_status?.text_raw ?? "")" )
-                            .font(.title3)
-                            .foregroundColor(.primary)
-                            .padding(10)
-                            
-                            .background(.gray.opacity(0.1))
-                            .cornerRadius(5)
-                            .clipped()
+
+
+                        VStack(alignment: .leading){
+                            StackNavigationLink(destination:
+                                 ProfileView(uid: weibo.retweeted_status?.user?.id ?? 0)
+                            , label: {
+                                Text("\(weibo.retweeted_status?.user?.screen_name ?? "")")
+                                    .font(.title3)
+                                    .foregroundColor(.black)
+                                    .fontWeight(.bold)
+                                    .padding(.horizontal,10)
+                            })
+                            .buttonStyle(.link)
+
+
+                            AttributedText( "\(weibo.retweeted_status?.text_raw ?? "")" )
+                                .font(.title3)
+                                .foregroundColor(.primary)
+                                .padding(.horizontal,10)
+                        }
+                        .padding(.vertical,10)
+                        .background(.gray.opacity(0.1))
+                        .cornerRadius(5)
+                        .clipped()
                         
                         // IMG
                         if( weibo.retweeted_status?.pics != nil ){

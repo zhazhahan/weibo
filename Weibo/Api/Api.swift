@@ -57,33 +57,33 @@ class Api{
         }
     }
     
-    // MyWeibo
-    func getProfile(uid:Int,completion: @escaping (MyWeiboRsp) -> Void) {
-        let parameters:[String:Any] = [
-            "uid":uid,
-            "page":1,
-            "containerid":1076033315279955,
-            "Accept":"application/json",
-            "user-agent":"Weibo For Mac"
-        ]
-        AF.request(ApiConfig.baseurl+"/api/container/getIndex",parameters: parameters).validate().responseData { (response) in
-            do {
-                let jsdata =  JSON(response.data)
-                //print("initData-jsdata",jsdata["data"])
-                let ff  = try jsdata["data"].rawData()
-                let object = try JSONDecoder().decode((MyWeiboRsp).self, from: ff)
-                completion(object)
-            }catch(let error) {
-                //print("decode fail:",error)
-            }
-        }
-    }
+//    // MyWeibo
+//    func getProfile(uid:Int,completion: @escaping (MyWeiboRsp) -> Void) {
+//        let parameters:[String:Any] = [
+//            "uid":uid,
+//            "page":1,
+//            "containerid":1076033315279955,
+//            "Accept":"application/json",
+//            "user-agent":"Weibo For Mac"
+//        ]
+//        AF.request(ApiConfig.baseurl+"/api/container/getIndex",parameters: parameters).validate().responseData { (response) in
+//            do {
+//                let jsdata =  JSON(response.data)
+//                //print("initData-jsdata",jsdata["data"])
+//                let ff  = try jsdata["data"].rawData()
+//                let object = try JSONDecoder().decode((MyWeiboRsp).self, from: ff)
+//                completion(object)
+//            }catch(let error) {
+//                //print("decode fail:",error)
+//            }
+//        }
+//    }
     
 
     // MyWeibo
     func getMyWeibo(page:Int,user_id:Int,completion: @escaping (MyWeiboRsp) -> Void) {
         let parameters:[String:Any] = [
-            "containerid":"2304136822380193",
+            "containerid":"230413\(user_id)",
             "Accept":"application/json",
             "user-agent":"Weibo For Mac"
         ]

@@ -18,7 +18,7 @@ struct LoginView: View {
         ZStack(){
             
             WebView(url: "https://m.weibo.cn")
-                .frame(width: 360, height: 480)
+                .frame(width: 360, height: 520)
             
             Button(action: {
                 doSetCookie()
@@ -30,19 +30,17 @@ struct LoginView: View {
                     .background(.orange)
             }
             .buttonStyle(.plain)
-            .frame(width: 360,height: 480,alignment: .bottom)
+            .frame(width: 360,height: 520,alignment: .bottom)
         }
-        .frame(width: 360, height: 480)
+        .frame(width: 360, height: 520)
     }
     
     
     func doSetCookie(){
         let dataStore = WKWebsiteDataStore.default()
         dataStore.httpCookieStore.getAllCookies({ (cookies) in
-            //print("---------cookies---------",cookies)
             for ( cookieProperties ) in cookies {
-                print("---------cookieProperties---------",cookieProperties)
-                    HTTPCookieStorage.shared.setCookie(cookieProperties)
+                HTTPCookieStorage.shared.setCookie(cookieProperties)
             }
         })
     }
@@ -59,7 +57,8 @@ struct WebView: NSViewRepresentable {
         }
 
         let webview = WKWebView()
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        request.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X)", forHTTPHeaderField: "User-Agent")
         webview.load(request)
 
         return webview

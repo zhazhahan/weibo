@@ -47,13 +47,10 @@ struct ProfileView: View {
     }
     
     func initData() {
-        //print("initData-2")
         Task{
             loading = true
-            //print("initData-2")
             
-            Api().getProfile(uid: uid){(res) in
-                //print("initData-2")
+            Api().getMyWeibo(page: 1, user_id: uid){(res) in
                 loading = false
                 
                 // 数据处理
@@ -70,7 +67,6 @@ struct ProfileView: View {
                 data = myweibo
                 
                 //print("jsstr",jsstr)
-//                data = jsstr
                 //print("myweibo",myweibo)
             }
         }
