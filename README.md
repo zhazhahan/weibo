@@ -9,5 +9,5 @@
 [👉 To Releases](https://github.com/zhazhahan/weibo/releases/tag/V-1.0.1)
 
 ### 预览
-![Image text](https://github.com/zhazhahan/weibo/raw/main/Weibo/home.jpg)
+![Image text](https://github.com/zhazhahan/weibo/raw/main/Weibo/v1.jpg)
 
