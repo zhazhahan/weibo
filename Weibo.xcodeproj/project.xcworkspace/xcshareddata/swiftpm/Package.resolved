@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "kingfisher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Kingfisher",
+      "state" : {
+        "branch" : "master",
+        "revision" : "9375e4a0e5db3698c1f92bd5d1dc88b0b71caa8b"
+      }
+    },
+    {
       "identity" : "stacknavigationview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lbrndnr/StackNavigationView",

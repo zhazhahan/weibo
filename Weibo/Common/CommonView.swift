@@ -6,32 +6,24 @@
 //
 
 import SwiftUI
-
-
-
-
-
+import Kingfisher
 
 struct PreviewView: View {
     var window = NSScreen.main?.visibleFrame
 
     var imgs:[WeiboPic] = []
-    @State var index:Int = 0
+    @Binding var index:Int
     @State var cimg:String = ""
     
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
 
         VStack(){
-            AsyncImage(url: URL(string:cimg )) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxHeight:480)
-            } placeholder: {
-                Color.gray.opacity(0.1).frame(width: 400,height: 300)
-            }
-            .frame(width: 400)
+
+            KFImage(URL(string:cimg))
+                .resizable()
+                .scaledToFill()
+                .frame(minWidth: 400,maxHeight:480)
 
             Spacer()
             

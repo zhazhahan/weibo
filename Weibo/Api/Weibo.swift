@@ -46,7 +46,7 @@ struct WeiboData:Codable{
     var max_id:Int?
 }
 
-struct Weibo:Codable,Identifiable{
+struct Weibo:Codable,Identifiable,Hashable{
     
     var id:String
     
@@ -79,7 +79,7 @@ struct Weibo:Codable,Identifiable{
     
     let attitudes_count:Int
     let comments_count:Int
-    let reposts_count:Int
+    let reposts_count:Int?
     
     let pics:[WeiboPic]?
 }
@@ -93,7 +93,7 @@ struct WeiboPicLarge:Codable,Hashable{
     let url:String
 }
 
-struct Retweeted:Codable{
+struct Retweeted:Codable,Hashable{
     let text:String
     var text_raw:String{
         let regex = try! NSRegularExpression(pattern: "<.*?>", options: [])
@@ -108,7 +108,7 @@ struct Retweeted:Codable{
 }
 
 
-struct WeiboUser:Codable{
+struct WeiboUser:Codable,Hashable{
     let screen_name:String
     let avatar_hd:String
     let id:Int

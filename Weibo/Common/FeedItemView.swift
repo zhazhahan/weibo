@@ -8,6 +8,7 @@
 import SwiftUI
 import AttributedText
 import StackNavigationView
+import Kingfisher
 
 struct FeedItemView: View {
     @State var weibo: Weibo
@@ -15,7 +16,7 @@ struct FeedItemView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     @State private var showingSheet = false
-    
+    @State var index:Int = 0
     
     @State var showLikeWindow = false
     @State var showCommentWindow = false
@@ -28,16 +29,12 @@ struct FeedItemView: View {
                 StackNavigationLink(destination:
                     ProfileView(uid: weibo.user.id)
                 , label: {
-                    AsyncImage(url: URL(string: weibo.user.avatar_hd)) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    } placeholder: {
-                        Color.gray.opacity(0.1)
-                    }
-                    .frame(width: 40,height: 40)
-                    .cornerRadius(40)
-                    .clipped()
+                    KFImage(URL(string: weibo.user.avatar_hd))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 40,height: 40)
+                        .cornerRadius(40)
+                        .clipped()
                 })
                 .buttonStyle(.plain)
                 .frame(width: 40,height: 40)
@@ -102,24 +99,22 @@ struct FeedItemView: View {
                             LazyVGrid(columns: columns,spacing: 10){
                                 ForEach(weibo.retweeted_status?.pics ?? [], id: \.self) { img in
                                     Button(action: {
+                                        self.index = 0
                                         showingSheet.toggle()
                                     }, label: {
-                                        AsyncImage(url: URL(string: img.url)) { image in
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                        } placeholder: {
-                                            Color.gray.opacity(0.1)
-                                        }
-                                        .frame(width: 100,height: 100)
+                                        KFImage(URL(string:img.url))
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100,height: 100)
                                     })
+                                    .tag(1)
                                     .frame(width: 100,height: 100)
                                     .buttonStyle(.plain)
                                     .cornerRadius(5)
                                     .clipped()
                                     .border(.gray.opacity(0.1))
                                     .sheet(isPresented: $showingSheet ) {
-                                        PreviewView(imgs: weibo.retweeted_status?.pics ?? [])
+                                        PreviewView(imgs: weibo.retweeted_status?.pics ?? [],index: $index)
                                     }
                                 }
                             }
@@ -135,16 +130,14 @@ struct FeedItemView: View {
                         LazyVGrid(columns: columns,spacing: 10){
                             ForEach(weibo.pics ?? [], id: \.self) { img in
                                 Button(action: {
+                                    self.index = 0
                                     showingSheet.toggle()
                                 }, label: {
-                                    AsyncImage(url: URL(string: img.url)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                    } placeholder: {
-                                        Color.gray.opacity(0.1)
-                                    }
-                                    .frame(width: 100,height: 100)
+                                    KFImage(URL(string:img.url))
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 100,height: 100)
+                                        .clipped()
                                 })
                                 .frame(width: 100,height: 100)
                                 .buttonStyle(.plain)
@@ -152,7 +145,7 @@ struct FeedItemView: View {
                                 .clipped()
                                 .border(.gray.opacity(0.1))
                                 .sheet(isPresented: $showingSheet ) {
-                                    PreviewView(imgs: weibo.pics ?? [])
+                                    PreviewView(imgs: weibo.pics ?? [],index: $index)
                                 }
                             }
                         }
@@ -181,7 +174,7 @@ struct FeedItemView: View {
                         
                         
                         Button(action: { self.showRetweetWindow = true }) {
-                            Label("\(weibo.reposts_count)",systemImage: "arrow.2.squarepath")
+                            Label("\(weibo.reposts_count ?? 0)",systemImage: "arrow.2.squarepath")
                         }
                         .popover(isPresented: $showRetweetWindow) {
                             //RetweetView(showRetweetWindow: $showRetweetWindow)

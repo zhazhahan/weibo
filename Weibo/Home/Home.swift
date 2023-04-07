@@ -8,23 +8,18 @@
 import SwiftUI
 import StackNavigationView
 
-
 struct Home: View {
 
     @State var tips:Bool = false
 
     @State var loading:Bool = false
-    @State var page:Int = 1
     @State var max_id:Int?
-
-
     
     @State var data:[Weibo] = []
     @State private var selectedShow: TVShow?
 
     var body: some View {
-        ScrollView {
-
+        VStack(spacing: 0) {
             if( tips ){
                 Text("😼 请登录，并在登录成功后点击[登录完成]按钮.")
                     .font(.title3)
@@ -33,18 +28,26 @@ struct Home: View {
                     .padding(.top,200)
             }
 
-
-            VStack(spacing: 0) {
-                ForEach(data) { tweet in
-                    FeedItemView(weibo: tweet).padding()
-                    Divider()
+            ScrollView {
+                ScrollViewReader { proxy in
+                    LazyVStack(spacing: 0) {
+                        ForEach(data) { tweet in
+                            FeedItemView(weibo: tweet).padding()
+                            Divider()
+                        }
+                    }
+                    .onChange(of: data) { _ in
+                        print("onChange",data.first?.user.screen_name)
+                        // 自动到底部
+                        proxy.scrollTo(0, anchor: .top)
+                    }
                 }
             }
-            
+
+
             // 下一页
             if( !loading && data.count > 0 ){
                 Button(action: {
-                    page+=1
                     initData()
                 }) {
                     Text("下一页")
@@ -59,7 +62,7 @@ struct Home: View {
         .toolbar {
             ToolbarItem(placement: .status) {
                 Button(action: {
-                    initData()
+                    refreshData()
                 }) {
                     Image(systemName: "goforward")
                 }
@@ -80,6 +83,9 @@ struct Home: View {
     }
     
     func initData() {
+
+        print("Max",max_id)
+
         Task{
             loading = true
             Api().getWeibos(max_id: max_id){(res) in
@@ -88,10 +94,6 @@ struct Home: View {
                 loading = false
             }
             loading = false
-
-//            if( data.count == 0 ){
-//                tips = true
-//            }
         }
     }
     
