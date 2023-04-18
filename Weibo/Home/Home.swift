@@ -42,19 +42,21 @@ struct Home: View {
                         proxy.scrollTo(0, anchor: .top)
                     }
                 }
-            }
 
-
-            // 下一页
-            if( !loading && data.count > 0 ){
-                Button(action: {
-                    initData()
-                }) {
-                    Text("下一页")
+                // 下一页
+                if( !loading && data.count > 0 ){
+                    Button(action: {
+                        initData()
+                    }) {
+                        Text("下一页")
+                    }
+                    .padding()
+                    .buttonStyle(.plain)
                 }
-                .padding()
-                .buttonStyle(.plain)
             }
+
+
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .navigationTitle(loading ?  "Loading..." : "首页")

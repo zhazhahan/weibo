@@ -15,7 +15,8 @@ struct ProfileView: View {
     
     
     @State private var showloginSheet = false
-    
+
+    @State var nickname:String = "Profile"
 
     
     var body: some View {
@@ -29,7 +30,7 @@ struct ProfileView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationTitle(loading ?  "Loading..." : "首页")
+        .navigationTitle(loading ?  "Loading..." : self.nickname)
         .background(Color.white)
         .toolbar {
             ToolbarItem(placement: .status) {
@@ -61,6 +62,7 @@ struct ProfileView: View {
                         if let weiboitem = jsstr[index].mblog {
                             //print(weiboitem.text)
                             myweibo.append(weiboitem)
+                            self.nickname = weiboitem.user.screen_name ?? ""
                         }
                     }
                 }

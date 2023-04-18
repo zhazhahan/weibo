@@ -83,10 +83,15 @@ struct FeedItemView: View {
                             .buttonStyle(.link)
 
 
-                            AttributedText( "\(weibo.retweeted_status?.text_raw ?? "")" )
-                                .font(.title3)
-                                .foregroundColor(.primary)
-                                .padding(.horizontal,10)
+                            HStack(){
+                                AttributedText( "\(weibo.retweeted_status?.text_raw ?? "")" )
+                                    .font(.title3)
+                                    .foregroundColor(.primary)
+                                    .padding(.horizontal,10)
+                                
+                                Spacer()
+                            }
+
                         }
                         .padding(.vertical,10)
                         .background(.gray.opacity(0.1))
@@ -105,10 +110,10 @@ struct FeedItemView: View {
                                         KFImage(URL(string:img.url))
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: 100,height: 100)
+                                            .frame(width: 160,height: 160)
                                     })
                                     .tag(1)
-                                    .frame(width: 100,height: 100)
+                                    .frame(width: 160,height: 160)
                                     .buttonStyle(.plain)
                                     .cornerRadius(5)
                                     .clipped()
@@ -118,7 +123,7 @@ struct FeedItemView: View {
                                     }
                                 }
                             }
-                            .frame(width: 340)
+                            .frame(width: 520)
                             //.background(.pink)
                         }
                     }
@@ -136,10 +141,10 @@ struct FeedItemView: View {
                                     KFImage(URL(string:img.url))
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(width: 100,height: 100)
+                                        .frame(width: 160,height: 160)
                                         .clipped()
                                 })
-                                .frame(width: 100,height: 100)
+                                .frame(width: 160,height: 160)
                                 .buttonStyle(.plain)
                                 .cornerRadius(5)
                                 .clipped()
@@ -149,7 +154,7 @@ struct FeedItemView: View {
                                 }
                             }
                         }
-                        .frame(width: 340)
+                        .frame(width: 520)
                         //.background(.pink)
                     }
                     
