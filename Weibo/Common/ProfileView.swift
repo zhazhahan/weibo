@@ -40,7 +40,6 @@ struct ProfileView: View {
                     Image(systemName: "goforward")
                 }
             }
-            
         }
         .task{
             initData()

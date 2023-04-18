@@ -88,7 +88,7 @@ struct FeedItemView: View {
                                     .font(.title3)
                                     .foregroundColor(.primary)
                                     .padding(.horizontal,10)
-                                
+
                                 Spacer()
                             }
 
@@ -159,32 +159,19 @@ struct FeedItemView: View {
                     }
                     
                     HStack(spacing: 20) {
-                        
-                        Button(action: { self.showLikeWindow = true }) {
+
+                        StackNavigationLink(destination: WeiboView(weibo: weibo), label: {
                             Label("\(weibo.attitudes_count)",systemImage: "hand.thumbsup")
-                        }
-                        .popover(isPresented: $showLikeWindow) {
-                            //LikeView(showLikeWindow: $showLikeWindow,likes: weibo.like)
-                        }
-                        .buttonStyle(.link)
-                        
-                        
-                        Button(action: { self.showCommentWindow = true }) {
-                            Label("\(weibo.comments_count)",systemImage: "bubble.right")
-                        }
-                        .popover(isPresented: $showCommentWindow) {
-                            //CommentView(showCommentWindow: $showCommentWindow,comments: weibo.comment)
-                        }
-                        .buttonStyle(.link)
-                        
-                        
-                        Button(action: { self.showRetweetWindow = true }) {
+                        })
+
+
+                        StackNavigationLink(destination: WeiboView(weibo: weibo), label: {
                             Label("\(weibo.reposts_count ?? 0)",systemImage: "arrow.2.squarepath")
-                        }
-                        .popover(isPresented: $showRetweetWindow) {
-                            //RetweetView(showRetweetWindow: $showRetweetWindow)
-                        }
-                        .buttonStyle(.link)
+                        })
+
+                        StackNavigationLink(destination: WeiboView(weibo: weibo), label: {
+                            Label("\(weibo.attitudes_count)",systemImage: "hand.thumbsup")
+                        })
                         
                     }
                     .padding(.top, 12)
