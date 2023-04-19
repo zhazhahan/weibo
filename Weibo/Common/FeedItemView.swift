@@ -10,6 +10,11 @@ import AttributedText
 import StackNavigationView
 import Kingfisher
 
+
+
+
+
+
 struct FeedItemView: View {
     @State var weibo: Weibo
     
@@ -112,7 +117,6 @@ struct FeedItemView: View {
                                             .scaledToFill()
                                             .frame(width: 160,height: 160)
                                     })
-                                    .tag(1)
                                     .frame(width: 160,height: 160)
                                     .buttonStyle(.plain)
                                     .cornerRadius(5)

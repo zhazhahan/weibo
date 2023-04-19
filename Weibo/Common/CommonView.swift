@@ -18,55 +18,59 @@ struct PreviewView: View {
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
 
+
         VStack(){
+                HStack(){
+                    Spacer()
 
-            HStack(){
-                Spacer()
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "xmark.circle.fill")
+                    })
+                    .buttonStyle(.plain)
+                    .font(.largeTitle)
+                    .padding()
+                }
 
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }, label: {
-                    Image(systemName: "xmark.circle.fill")
-                })
-                .buttonStyle(.plain)
-                .font(.title)
-                .padding(40)
-            }
-            
-            KFImage(URL(string:cimg))
-                .resizable()
-                .scaledToFit()
-                .padding()
-                .shadow(color: .gray,radius: 10)
-                //.frame(minWidth: 400,maxHeight:480)
-            
-            HStack(alignment: .top){
-
-                Button(action: {
-                    showPre()
-                }, label: {
-                    Image(systemName: "arrow.left")
-                })
-                .foregroundColor( index != 0  ? .blue : .gray)
-                .buttonStyle(.plain)
-                
-                Spacer()
+                KFImage(URL(string:cimg))
+                    .resizable()
+                    .scaledToFit()
+                    .shadow(color: .gray.opacity(0.3),radius: 1)
+                    .padding()
 
 
-                Button(action: {
-                    showNext()
-                }, label: {
-                    Image(systemName: "arrow.right")
-                })
-                .foregroundColor( index < imgs.count-1 ? .blue : .gray)
-                .buttonStyle(.plain)
-            }
-            .font(.title)
-            .frame(height: 40)
-            //.background(.white)
+                HStack(alignment: .top){
+
+                    Button(action: {
+                        showPre()
+                    }, label: {
+                        Text("上一张")
+                    })
+                    .foregroundColor( index != 0  ? .blue : .gray)
+                    .buttonStyle(.plain)
+
+                    Text("\(index+1) / \(self.imgs.count)")
+                        .foregroundColor(.gray.opacity(0.8))
+
+
+
+                    Button(action: {
+                        showNext()
+                    }, label: {
+                        Text("下一张")
+                    })
+                    .foregroundColor( index < imgs.count-1 ? .blue : .gray)
+                    .buttonStyle(.plain)
+                }
+                .frame(width: 280,height: 40)
+                //.background(.white)
+                .padding(.horizontal)
+
         }
-        .frame(idealWidth: NSApp.keyWindow?.contentView?.bounds.width ?? 400, idealHeight: NSApp.keyWindow?.contentView?.bounds.height ?? 300)
 
+        .frame(idealWidth: ( NSApp.keyWindow?.contentView?.bounds.width ?? 400) - 100, idealHeight: ( NSApp.keyWindow?.contentView?.bounds.height ?? 300 ) - 100 )
+        .background(.clear)
         .task{
             //Init
             cimg = imgs[index].large.url
