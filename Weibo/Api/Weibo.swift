@@ -75,7 +75,8 @@ struct Weibo:Codable,Identifiable,Hashable{
     let retweeted_status:Retweeted?
     
     let user:WeiboUser
-    
+
+    var liked:Bool?
     
     let attitudes_count:Int
     let comments_count:Int

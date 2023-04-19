@@ -160,17 +160,20 @@ struct FeedItemView: View {
                     
                     HStack(spacing: 20) {
 
-                        StackNavigationLink(destination: WeiboView(weibo: weibo), label: {
-                            Label("\(weibo.attitudes_count)",systemImage: "hand.thumbsup")
+                        Button(action: {
+                            weibo.liked = true
+                        }, label: {
+                            Label("\(weibo.attitudes_count)",systemImage: weibo.liked ?? false ? "hand.thumbsup.fill" : "hand.thumbsup")
                         })
+                        .foregroundColor(weibo.liked ?? false ? .pink : .gray)
+                        .buttonStyle(.plain)
 
+                        StackNavigationLink(destination: WeiboView(weibo: weibo), label: {
+                            Label("\(weibo.comments_count)",systemImage: "ellipsis.bubble")
+                        })
 
                         StackNavigationLink(destination: WeiboView(weibo: weibo), label: {
                             Label("\(weibo.reposts_count ?? 0)",systemImage: "arrow.2.squarepath")
-                        })
-
-                        StackNavigationLink(destination: WeiboView(weibo: weibo), label: {
-                            Label("\(weibo.attitudes_count)",systemImage: "hand.thumbsup")
                         })
                         
                     }

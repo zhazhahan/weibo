@@ -20,38 +20,53 @@ struct PreviewView: View {
 
         VStack(){
 
-            KFImage(URL(string:cimg))
-                .resizable()
-                .scaledToFill()
-                .frame(minWidth: 400,maxHeight:480)
-
-            Spacer()
-            
             HStack(){
-                
-                Button( "上一张") {
-                    showPre()
-                }
-                .foregroundColor( index != 0  ? .blue : .gray)
-                .buttonStyle(.plain)
-                
+                Spacer()
+
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
-                    Text("关闭").foregroundColor(.blue)
+                    Image(systemName: "xmark.circle.fill")
                 })
                 .buttonStyle(.plain)
+                .font(.title)
+                .padding(40)
+            }
+            
+            KFImage(URL(string:cimg))
+                .resizable()
+                .scaledToFit()
+                .padding()
+                .shadow(color: .gray,radius: 10)
+                //.frame(minWidth: 400,maxHeight:480)
+            
+            HStack(alignment: .top){
+
+                Button(action: {
+                    showPre()
+                }, label: {
+                    Image(systemName: "arrow.left")
+                })
+                .foregroundColor( index != 0  ? .blue : .gray)
+                .buttonStyle(.plain)
                 
-                Button( "下一张") {
+                Spacer()
+
+
+                Button(action: {
                     showNext()
-                }
+                }, label: {
+                    Image(systemName: "arrow.right")
+                })
                 .foregroundColor( index < imgs.count-1 ? .blue : .gray)
                 .buttonStyle(.plain)
             }
-            .frame(width: 400,height: 40)
-            .background(.white)
+            .font(.title)
+            .frame(height: 40)
+            //.background(.white)
         }
-        .frame(width: 400)
+        .frame(idealWidth: NSApp.keyWindow?.contentView?.bounds.width ?? 400, idealHeight: NSApp.keyWindow?.contentView?.bounds.height ?? 300)
+
         .task{
             //Init
             cimg = imgs[index].large.url
